@@ -1,0 +1,10 @@
+
+# Mac DS_Store Files
+.DS_Store
+
+/node_modules
+/auth.json
+
+*.css.map
+*.min.css
+*.min.js
