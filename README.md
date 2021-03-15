@@ -40,6 +40,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         var stories = new window.IAS.Stories("stories_widget", {
             apiKey: "test-key",
             userId: "123",
+            tags: "moscow,travels",
             hasLike: true,
             slider: {
                 title: {
@@ -65,6 +66,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
                     },
                     boxShadow: null,
                     opacity: 1,
+                    mask: {
+                        color: 'rgba(34, 34, 34, 0.3)'
+                    },
                     read: {
                         border: {
                             radius: null,
@@ -74,6 +78,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
                         },
                         boxShadow: null,
                         opacity: null,
+                        mask: {
+                            color: 'rgba(34, 34, 34, 0.1)'
+                        },
                     },
                 },
                 layout: {
@@ -95,6 +102,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
                 closeButtonPosition: 'right',
                 scrollStyle: 'flat',
             },
+            placeholders: {
+                user: 'Guest'
+            }
         });
 
         // 4. Override default loading animation
@@ -131,11 +141,13 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| apiKey   | string                           | You project integration key |
-| userId   | string &#124; number &#124; null | User id |
-| hasLike  | boolean | Enable like functional. Default disabled |
-| slider   | object | Slider options, see below. |
-| reader   | object | Story reader options, see below |
+| apiKey       | string                           | Your project integration key |
+| userId       | string &#124; number &#124; null | User id |
+| tags         | string  | Tags, separated by commas |
+| hasLike      | boolean | Enable "Like" functional. Default disabled |
+| slider       | object  | [Slider options](#slider-options) |
+| reader       | object  | [Story reader options](#story-reader-options) |
+| placeholders | object  | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
 
 ### Slider options
 
@@ -184,7 +196,8 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 | border.gap    | number | Space between card and border, `px`. Default `3` |
 | boxShadow     | string &#124; null | Card box-shadow, valid css value. Default `null` |
 | opacity       | number | Card opacity. Default `null` |
-| read          | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity` <br />Apply this values (if current value not null) on card in `read` state. Default all values null |
+| mask          | object &#124; null | Card mask - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null` |
+| read          | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `read` state. Default all values null |
 
 ### Slider navigation options
 
@@ -197,8 +210,16 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | controlsBackgroundColor | string | CSS valid color value. Default `#ffffff` |
 | controlsColor           | string | CSS valid color value. Default `#000000` |
 
+### Story reader options
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| closeButtonPosition        | string | Close button position, one of `left`, `right` |
+| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube` |
+| loader.default.color       | string | Default loader primary color. Valid css color |
+| loader.default.accentColor | string | Default loader accent color. Valid css color |
+
 ---
---- 
 
 # Story share page
 
@@ -217,8 +238,9 @@ where token - project integration key
 
 Possible HTTP response codes:
 
-403 - not transferred or incorrect Bearer token or the project is not active 404 - The requested story was not found 200
-- ok
+* 403 - not transferred or incorrect Bearer token or the project is not active
+* 404 - The requested story was not found
+* 200 - ok
 
 The response body is a json object with the following fields:
 
@@ -227,7 +249,7 @@ The response body is a json object with the following fields:
 | Variable | Type | Description |
 |----------|------|-------------|
 | title      | string | Story title |
-| image      | array | Array of [Image](#story-share-page-image)) |
+| image      | array | Array of [Image](#story-share-page-image) |
 | story_data | object | Internal data for Stories widget |
 
 ### Story share page image
