@@ -219,6 +219,23 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | loader.default.color       | string | Default loader primary color. Valid css color |
 | loader.default.accentColor | string | Default loader accent color. Valid css color |
 
+
+## Events
+
+| Name | Type | Description |
+|----------|------|-------------|
+| clickOnStory       | {id: number, isDeeplink: boolean, url?: string} | Click on story card from slider list |
+| showStory          | {id: number } | Show story (from slider or reader) |
+| closeStory         | {id: number } | Close story (from reader - transition from story or click on close) |
+| showSlide          | {id: number, index: number } | Show slide |
+| clickOnButton      | {id: number, index: number, url: string } | Click on button with external link |
+| likeStory          | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story like |
+| dislikeStory       | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
+| favoriteStory      | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
+| shareStory         | {id: number } | Click on story sharing |
+| shareStoryWithPath | {id: number, url: string } | Event after successful creation of the sharing path |
+
+
 ---
 
 # Story share page
