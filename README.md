@@ -222,9 +222,15 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 
 ## Events
 
-| Name | Type | Description |
+You can subscribe to events after creating the widget instance
+```js
+const stories = new window.IAS.Stories(mountId, config);
+stories.on('clickOnStory', payload => console.log(payload));
+```
+
+| Name | Payload | Description |
 |----------|------|-------------|
-| clickOnStory       | {id: number, isDeeplink: boolean, url?: string} | Click on story card from slider list |
+| clickOnStory       | {id: number, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list |
 | showStory          | {id: number } | Show story (from slider or reader) |
 | closeStory         | {id: number } | Close story (from reader - transition from story or click on close) |
 | showSlide          | {id: number, index: number } | Show slide |
