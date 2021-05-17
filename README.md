@@ -104,7 +104,12 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
             },
             placeholders: {
                 user: 'Guest'
-            }
+            },
+            // optional handler
+            storyLinkHandleClick: function (payload) {
+                // default behaviour
+                window.open(payload.url, '_self');
+            },
         });
 
         // 4. Override default loading animation
@@ -148,6 +153,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 | slider       | object  | [Slider options](#slider-options) |
 | reader       | object  | [Story reader options](#story-reader-options) |
 | placeholders | object  | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
+| storyLinkHandleClick | ({id: number, index: number, url: string}) => void | Handler for overloading a click on a link inside a story / deep link from a story feed. Default behaviour - open link in same window. |
 
 ### Slider options
 
@@ -271,9 +277,10 @@ The response body is a json object with the following fields:
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| title      | string | Story title |
-| image      | array | Array of [Image](#story-share-page-image) |
-| story_data | object | Internal data for Stories widget |
+| title       | string | Story title |
+| description | string | Story description |
+| image       | array | Array of [Image](#story-share-page-image) |
+| story_data  | object | Internal data for Stories widget |
 
 ### Story share page image
 
