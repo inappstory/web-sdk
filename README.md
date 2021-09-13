@@ -37,9 +37,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     // 3. This function creates an <iframe> (and Stories` widget)
     //    after the API code downloads.
     window.IASReady.ready(function () {
-        var stories = new window.IAS.Stories("stories_widget", {
-            apiKey: "test-key",
-            userId: "123",
+        var stories = new window.IAS.Stories('stories_widget', {
+            apiKey: '{project-integration-key}',
+            userId: '{client-identifier}',
             tags: "moscow,travels",
             hasLike: true,
             slider: {
