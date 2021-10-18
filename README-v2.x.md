@@ -41,7 +41,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     const storyManagerConfig = {
       apiKey: "{project-integration-key}",
       userId: "kdijhud4454d", // usually - hash from real user identifier
-      tags: "", // string, separated by comma
+      tags: [], // Array<string>
       placeholders: {
         user: "Guest"
       },
@@ -134,10 +134,11 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     // 5. Show onboarding example
     // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string)
     // customTags - for override tags from storyManager
-    window.IAS.StoryManager.getInstance().showOnboardingStories(appearanceManager).then(result => {
+    storyManager.showOnboardingStories(appearanceManager).then(result => {
        console.log({showOnboardingStoriesResult: result});
-       // result: boolen - were onboarding or not
+       // result: boolean - were onboarding or not
     });
+    // or window.IAS.StoryManager.getInstance()
     
 
   });
@@ -199,7 +200,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     const storyManagerConfig = {
       apiKey: "{project-integration-key}",
       userId: "kdijhud4454d", // usually - hash from real user identifier
-      tags: "", // string, separated by comma
+      tags: [], // Array<string>
       placeholders: {
         user: "Guest"
       },
@@ -220,16 +221,14 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       .setStoryReaderOptions({
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
-      }).setStoryFavoriteReaderOptions({
-
-    });
+      });
 
     // 5. Show onboarding example
-    // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string)
+    // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>)
     // customTags - for override tags from storyManager
     window.IAS.StoryManager.getInstance().showOnboardingStories(appearanceManager).then(result => {
        console.log({showOnboardingStoriesResult: result});
-       // result: boolen - were onboarding or not
+       // result: boolean - were onboarding or not
     });
 
   });
@@ -248,7 +247,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 |----------|------|-------------|
 | apiKey       | string                           | Your project integration key |
 | userId       | string &#124; number &#124; null | User id |
-| tags         | string  | Tags, separated by commas |
+| tags         | Array<string> | Array of tags |
 | placeholders | object  | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
 | lang         | 'ru' &#124; 'en' | User locale |
 
