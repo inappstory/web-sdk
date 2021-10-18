@@ -238,6 +238,36 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 </html>
 ```
 
+---
+
+## StoryManager public methods
+```ts
+interface StoryManager {
+  getInstance(): StoryManager; // static
+  setTags(tags: Array<string>): void;
+  setUserId(userId: string | number): void;
+  setLang(lang: 'ru' | 'en'): void;
+  setPlaceholders(placeholders: Dict<string>): void;
+}
+
+interface StoriesList {
+  (mountSelector: string, appearanceManager: AppearanceManager): StoriesList;
+  reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
+}
+```
+
+### StoriesList reload example
+```js
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager);
+
+storyManager.setTags(['msk']);
+
+storiesList.reload();
+// or without loader animation
+// storiesList.reload({needLoader: false});
+
+```
+
 
 --- 
 
