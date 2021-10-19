@@ -223,7 +223,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         scrollStyle: 'flat',
       });
 
-    // 5. Show onboarding example
+    // 4. Show onboarding example
     // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>)
     // customTags - for override tags from storyManager
     window.IAS.StoryManager.getInstance().showOnboardingStories(appearanceManager).then(result => {
@@ -248,6 +248,9 @@ interface StoryManager {
   setUserId(userId: string | number): void;
   setLang(lang: 'ru' | 'en'): void;
   setPlaceholders(placeholders: Dict<string>): void;
+  showStory(id: number, appearanceManager: AppearanceManager): Promise<boolean>;
+  closeStoryReader(): void;
+  showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>): Promise<boolean>;
 }
 
 interface StoriesList {
@@ -265,6 +268,34 @@ storyManager.setTags(['msk']);
 storiesList.reload();
 // or without loader animation
 // storiesList.reload({needLoader: false});
+
+```
+
+### Show single story example
+```js
+
+// StoryManager singleton instance
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+
+// or get previously created (from page layout for example)
+const storyManager = window.IAS.StoryManager.getInstance();
+
+// AppearanceManager instance
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// appearance config
+appearanceManager.setCommonOptions({
+  hasLike: true,
+  hasFavorite: true
+})
+  .setStoryReaderOptions({
+    closeButtonPosition: 'right',
+    scrollStyle: 'flat',
+  });
+
+storyManager.showStory(125, appearanceManager).then(result => {
+  console.log({showStoryResult: result});
+});
 
 ```
 
