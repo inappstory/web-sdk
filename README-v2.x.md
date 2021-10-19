@@ -242,15 +242,46 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
 ## StoryManager public methods
 ```ts
+type StoryManagerConfig = {
+  apiKey: string;
+  userId?: Optional<string|number>;
+  tags?: Optional<Array<string>>;
+  placeholders?: Optional<Dict<string>>;
+  lang?: Optional<'ru' | 'en'>;
+};
+
+type StoryManagerCallbackPayload<T> = {src: 'storiesList' | 'storyReader', data: T};
+
+enum StoriesEvents {
+  CLICK_ON_STORY = 'clickOnStoryLink',
+};
+
+interface EventPayloadDataNameMap {
+  "clickOnStoryLink": {id: number, index: number, url: string};
+};
+
+type StoryManagerCallbacks = {
+  storyLinkClickHandler: (payload: StoryManagerCallbackPayload<{id: number, index: number, url: string}>) => void;
+};
+
 interface StoryManager {
+  (config: StoryManagerConfig, callbacks?: StoryManagerCallbacks): StoryManager;
   getInstance(): StoryManager; // static
   setTags(tags: Array<string>): void;
   setUserId(userId: string | number): void;
   setLang(lang: 'ru' | 'en'): void;
   setPlaceholders(placeholders: Dict<string>): void;
-  showStory(id: number, appearanceManager: AppearanceManager): Promise<boolean>;
+  showStory(id: number | string, appearanceManager: AppearanceManager): Promise<boolean>;
   closeStoryReader(): void;
   showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>): Promise<boolean>;
+  
+  // callbaks
+  set storyLinkClickHandler(payload: StoryManagerCallbackPayload<{id: number, index: number, url: string}>);
+  
+  // events
+  on<K extends keyof EventPayloadDataNameMap>(event: K, listener: (payload: StoryManagerCallbackPayload<EventPayloadDataNameMap[K]>) => void): StoryManager;
+  once<K extends keyof EventPayloadDataNameMap>(event: K, listener: (payload: StoryManagerCallbackPayload<EventPayloadDataNameMap[K]>) => void): StoryManager;
+
 }
 
 interface StoriesList {
@@ -258,6 +289,20 @@ interface StoriesList {
   reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
 }
 ```
+
+### StoryReader btnClickHandler example
+```js
+storyManager.on("clickOnStoryLink", payload => {
+   const url = payload.data.url;
+   if (url.indexOf('custom-schema://') === 0) {
+       // run custom action
+   } else {
+     window.open(url, '_self');
+   }
+});
+
+```
+
 
 ### StoriesList reload example
 ```js
@@ -361,6 +406,16 @@ storyManager.showStory(125, appearanceManager).then(result => {
 | opacity       | number | Card opacity. Default `null` |
 | mask          | object &#124; null | Card mask - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null` |
 | read          | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `read` state. Default all values null |
+
+### Slider favorite card additional options
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| title         | object | See below |
+| title.content | string | Card title |
+| title.color   | string | CSS valid color value. Default `#000000` |
+| title.padding | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15` |
+| title.font    | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
 
 ### Slider navigation options
 
