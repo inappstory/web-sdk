@@ -129,7 +129,11 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
     // 4. Override default loading animation
     storiesList.on('startLoader', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
-    storiesList.on('endLoader', loaderContainer => loaderContainer.style.background = 'none');
+    storiesList.on('endLoader', (loaderContainer, loadedStoriesLength) => {
+      loaderContainer.style.background = 'none';
+      // {defaultListLength: number, favoriteListLength: number}
+      console.log({loadedStoriesLength});
+    });
     
     // 5. Show onboarding example
     // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string)
