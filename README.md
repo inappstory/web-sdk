@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.2.0.
+This documentation is for version 2.2.1.
 
 ## Introduction
 
@@ -26,7 +26,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.2.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.2.1/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
