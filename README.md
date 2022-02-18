@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.2.1.
+This documentation is for version 2.2.5.
 
 ## Introduction
 
@@ -26,7 +26,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.2.1/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.2.5/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -145,7 +145,13 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
        // result: boolean - were onboarding or not
     });
     // or window.IAS.StoryManager.getInstance()
-    
+      
+    // 6. Add events for internal statistics (optional)
+    const publicEvents = ['clickOnStory', 'showSlide', 'showStory', 'closeStory', 'clickOnButton', 'likeStory', 'dislikeStory', 'favoriteStory', 'shareStory', 'shareStoryWithPath'];
+    publicEvents.forEach((eventName) => storyManager.on(eventName, (payload) => console.log("event", eventName, payload)));
+
+
+
 
   });
 
@@ -449,5 +455,25 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | loader.default.color       | string | Default loader primary color. Valid css color |
 | loader.default.accentColor | string | Default loader accent color. Valid css color |
 
----
+
+## Events
+
+You can subscribe to events after creating the widget instance
+```js
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+storyManager.on('clickOnStory', payload => console.log(payload));
+```
+
+| Name | Payload | Description |
+|----------|------|-------------|
+| clickOnStory       | {id: number, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list |
+| showStory          | {id: number } | Show story (from slider or reader) |
+| closeStory         | {id: number } | Close story (from reader - transition from story or click on close) |
+| showSlide          | {id: number, index: number } | Show slide |
+| clickOnButton      | {id: number, index: number, url: string } | Click on button with external link |
+| likeStory          | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story like |
+| dislikeStory       | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
+| favoriteStory      | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
+| shareStory         | {id: number } | Click on story sharing |
+| shareStoryWithPath | {id: number, url: string } | Event after successful creation of the sharing path |
 
