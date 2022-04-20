@@ -2,7 +2,16 @@
 
 # Stories Widget
 
-This documentation is for version 2.2.10.
+This documentation is for version 2.3.0.
+
+## Migration guide from 2.2.x to 2.3.x
+Changes event names for storiesList instance
+from "startLoading" and "endLoading" to "startLoad" and "endLoad"
+
+The status of loading storiesList is added to "endLoad" event
+
+Field "read" in [Slider card item options](#slider-card-options) changed to "opened"
+
 
 ## Introduction
 
@@ -26,7 +35,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.2.10/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -130,8 +139,8 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager);
 
     // 4. Override default loading animation
-    storiesList.on('startLoader', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
-    storiesList.on('endLoader', (loaderContainer, loadedStoriesLength) => {
+    storiesList.on('startLoad', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
+    storiesList.on('endLoad', (loaderContainer, loadedStoriesLength) => {
       loaderContainer.style.background = 'none';
       // {defaultListLength: number, favoriteListLength: number}
       console.log({loadedStoriesLength});
@@ -195,7 +204,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.2.10/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -402,28 +411,28 @@ storyManager.showStory(125, appearanceManager).then(result => {
 
 ### Slider card options
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| title           | object | See below |
-| title.display   | boolean | Determines whether to show the title or not |
+| Variable        | Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-----------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title           | object | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| title.display   | boolean | Determines whether to show the title or not                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | title.position  | string | Title position. Variants: `cardInsideBottom` (inside card, at bottom), `cardOutsideTop` (above the card) and `cardOutsideBottom`(under the card). Default - `cardInsideBottom`<br/> Note when using the `cardOutsideTop` or `cardOutsideBottom` option you must manually specify a [Slider layout height](#slider-layout-options) value. Usually this is the height of the card plus card title lineHeight * card title lineClamp + card title vertical padding |
-| title.textAlign | string | Text in title horizontal align, variants: `left`, `center` and `right`. Default `left`. |
-| title.lineClamp | number | Numbers of text lines. Default 3. |
-| title.color     | string | CSS valid color value. Default `#ffffff` |
-| title.padding   | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15` |
-| title.font      | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
-| gap             | number | Space between cards, `px`. Default `10` |
-| height          | number | Card height, `px`. Default `70` |
-| variant         | string | Card style, one of `circle`, `quad`, `rectangle`. Default `circle` |
-| border          | object | See below |
-| border.radius   | number | Card border radius, `px`. Default `0` |
-| border.color    | string | Card border color, valid css. Default `black` |
-| border.width    | number | Card border width, `px`. Default `2` |
-| border.gap      | number | Space between card and border, `px`. Default `3` |
-| boxShadow       | string &#124; null | Card box-shadow, valid css value. Default `null` |
-| opacity         | number | Card opacity. Default `null` |
-| mask            | object &#124; null | Card mask - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null` |
-| read            | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `read` state. Default all values null |
+| title.textAlign | string | Text in title horizontal align, variants: `left`, `center` and `right`. Default `left`.                                                                                                                                                                                                                                                                                                                                                                         |
+| title.lineClamp | number | Numbers of text lines. Default 3.                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| title.color     | string | CSS valid color value. Default `#ffffff`                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| title.padding   | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15`                                                                                                                                                                                                                                                                                                                                                                 |
+| title.font      | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com).                                                                                                                                                                                                            | 
+| gap             | number | Space between cards, `px`. Default `10`                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| height          | number | Card height, `px`. Default `70`                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| variant         | string | Card style, one of `circle`, `quad`, `rectangle`. Default `circle`                                                                                                                                                                                                                                                                                                                                                                                              |
+| border          | object | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| border.radius   | number | Card border radius, `px`. Default `0`                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| border.color    | string | Card border color, valid css. Default `black`                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| border.width    | number | Card border width, `px`. Default `2`                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| border.gap      | number | Space between card and border, `px`. Default `3`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| boxShadow       | string &#124; null | Card box-shadow, valid css value. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| opacity         | number | Card opacity. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| mask            | object &#124; null | Card mask - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                                                         |
+| opened          | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `opened` state. Default all values null                                                                                                                                                                                                                                                                                                   |
 
 ### Slider favorite card additional options
 
@@ -456,7 +465,7 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | loader.default.accentColor | string | Default loader accent color. Valid css color |
 
 
-## Events
+## StoryManager events
 
 You can subscribe to events after creating the widget instance
 ```js
@@ -464,16 +473,116 @@ const storyManager = new window.IAS.StoryManager(storyManagerConfig);
 storyManager.on('clickOnStory', payload => console.log(payload));
 ```
 
-| Name | Payload | Description |
-|----------|------|-------------|
-| clickOnStory       | {id: number, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list |
-| showStory          | {id: number } | Show story (from slider or reader) |
-| closeStory         | {id: number } | Close story (from reader - transition from story or click on close) |
-| showSlide          | {id: number, index: number } | Show slide |
-| clickOnButton      | {id: number, index: number, url: string } | Click on button with external link |
-| likeStory          | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story like |
-| dislikeStory       | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
-| favoriteStory      | {id: number, value: boolean } | Click to set (value=true) or unset (value=false) story dislike |
-| shareStory         | {id: number } | Click on story sharing |
-| shareStoryWithPath | {id: number, url: string } | Event after successful creation of the sharing path |
+| Name                | Payload                                                              | Description                                                         |
+|---------------------|----------------------------------------------------------------------|---------------------------------------------------------------------|
+| clickOnStory        | { ...commonFields, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list                                |
+| showStory           | { ...commonFields }                                                  | Show story (from slider or reader)                                  |
+| closeStory          | { ...commonFields, action: CloseAction }                             | Close story (from reader - transition from story or click on close) |
+| showSlide           | { ...commonFields, index: number }                                   | Show slide                                                          |
+| clickOnButton       | { ...commonFields, index: number, url: string }                      | Click on button with external link                                  |
+| likeStory           | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story like         |
+| dislikeStory        | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story dislike      |
+| favoriteStory       | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story dislike      |
+| shareStory          | { ...commonFields }                                                  | Click on story sharing                                              |
+| shareStoryWithPath  | { ...commonFields, url: string }                                     | Event after successful creation of the sharing path                 |
+| clickOnFavoriteCell | { feed: string }                                                     | Event after successful creation of the sharing path                 |
 
+```ts
+type Option<T> = T | null;
+
+const commonFields = {
+    id: number, // story id
+    title: Option<string>, // story title
+    tags: Array<string>,
+    slidesCount: Option<number>,
+    feed: Option<string>, // feedSlug ("default", "onboarding" or custom)
+    source: Option<string> // "direct" (reader was opened manual), "list" (from feed list), "favorite" (from favorite list), "onboarding" (from onboarding list) 
+};
+
+// only for "clickOnStory" event field "source" can be "list" or "favorite"
+
+
+
+enum CloseAction {
+    closeReaderByCloseBtn = "closeReaderByCloseBtn", // closed by btn with cross icon in StoryReader
+    closeReaderByEscBtn = "closeReaderByEscBtn", // closed by ESC on keyboard (desktop only)
+    swipeDown = "swipeDown", // closed by swipe down StoryReader (mobile only)
+    swipe = "swipe", // closed by swipe on next story (mobile only)
+    lastSlideClick = "lastSlideClick", // closed by first (move backward) or last (move forward) slide in story
+    auto = "auto", // closed by auto transition (by timer) on next story
+    externalCloseReader = "externalCloseReader" // closed by public API method StoryManager.closeStoryReader
+};
+```
+
+
+## StoriesList events
+
+You can subscribe to events after creating the widget instance
+```js
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager);
+
+storiesList.on('startLoad', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
+storiesList.on('endLoad', (loaderContainer, status) => {
+    loaderContainer.style.background = 'none';
+    console.log({status});
+});
+
+```
+
+| Name      | Payload                                                | Description        |
+|-----------|--------------------------------------------------------|--------------------|
+| startLoad | loaderContainer: HTMLDivElement                        | Start list loading |
+| endLoad   | loaderContainer: HTMLDivElement, status: EndLoadStatus | End list loading   |
+
+```ts
+type Option<T> = T | null;
+
+type EndLoadStatus = {
+    success: boolean // storiesList load status 
+    error: Option<{ // null if status === true
+        name: string // error type - enum {networkError = "networkError"}
+        networkStatus: Option<number> // request status, 404 for example
+        networkMessage: Option<string> // request status text, "Feed not found" for example
+    }>
+    feed: string|number // feed slug or id
+    defaultListLength: number // loaded feed items count
+    favoriteListLength: number // loaded favorite items in feed count
+};
+
+// success example
+let status = {
+    success: true,
+    error: null,
+    feed: "default",
+    defaultListLength: 10,
+    favoriteListLength: 0
+};
+
+// fail example
+status = {
+    success: false,
+    error: {
+        name: "networkError",
+        networkStatus: 404,
+        networkMessage: "Feed not found"
+    },
+    feed: "default",
+    defaultListLength: 0,
+    favoriteListLength: 0,
+};
+
+// fail example (network offline)
+status = {
+    success: false,
+    error: {
+        name: "networkError",
+        networkStatus: null,
+        networkMessage: null
+    },
+    feed: "default",
+    defaultListLength: 0,
+    favoriteListLength: 0,
+};
+
+```

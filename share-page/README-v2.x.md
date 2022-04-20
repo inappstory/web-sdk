@@ -124,15 +124,15 @@ The response body is a json object with the following fields:
     // Show SharePage
     const id = "krtdhze"; // from url path
     const sharePageOptions = {
-      handleStartLoading: () => console.log("handleStartLoading"),
-      handleStopLoading: (result) => console.log("handleStartLoading", result),  // result: boolean - were onboarding or not
+      handleStartLoad: () => console.log("handleStartLoad"),
+      handleStopLoad: (result) => console.log("handleStartLoad", result),  // result: boolean - were onboarding or not
       handleStoryReaderClose: () => console.log("handleStoryReaderClose")
     };
     const sharePage = new storyManager.SharePage(id, appearanceManager, sharePageOptions);
 
     // or events can handle over eventEmitter
-    // sharePage.on("startLoading", () => console.log("startLoading"));
-    // sharePage.on("endLoading", (e) => console.log("endLoading", e.result));
+    // sharePage.on("startLoad", () => console.log("startLoad"));
+    // sharePage.on("endLoad", (e) => console.log("endLoad", e.result));
     // sharePage.on("closeStoryReader", () => console.log("closeStoryReader"));
 
     // clicks on buttons in reader
