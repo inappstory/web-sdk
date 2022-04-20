@@ -12,6 +12,10 @@ The status of loading storiesList is added to "endLoad" event
 
 Field "read" in [Slider card item options](#slider-card-options) changed to "opened"
 
+For use custom feed - pass feedSlug as third argument to StoriesList constructor
+Value by default - "default"
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, "customFeed");
+
 
 ## Introduction
 
@@ -136,7 +140,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
     // mount and start StoriesList widget
     // #stories_widget - html element selectors
-    const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager);
+    const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, "default");
 
     // 4. Override default loading animation
     storiesList.on('startLoad', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
@@ -306,7 +310,7 @@ interface StoryManager {
 }
 
 interface StoriesList {
-  (mountSelector: string, appearanceManager: AppearanceManager): StoriesList;
+  (mountSelector: string, appearanceManager: AppearanceManager, feedSlugOrId: string|number): StoriesList;
   reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
 }
 ```
