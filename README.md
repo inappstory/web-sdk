@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.3.0.
+This documentation is for version 2.3.1.
 
 ## Migration guide from 2.2.x to 2.3.x
 Changes event names for storiesList instance
@@ -39,7 +39,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.1/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -135,7 +135,11 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
       }).setStoryFavoriteReaderOptions({
-
+        title: {
+            content: "Favorite",
+            color: "white",
+            font: "14px/16px InternalPrimaryFont"
+        }
     });
 
     // mount and start StoriesList widget
@@ -208,7 +212,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.1/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -467,6 +471,15 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube` |
 | loader.default.color       | string | Default loader primary color. Valid css color |
 | loader.default.accentColor | string | Default loader accent color. Valid css color |
+
+## AppearanceManager - StoryFavoriteReaderOptions
+since v2.3.1
+
+| Variable       | Type | Description                                                                                                                                                                                                                                                |
+|----------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title.content  | string | Title text. Default value - "Favorite".                                                                                                                                                                                                                    |
+| title.color    | string | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
+| title.font     | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
 
 
 ## StoryManager events
