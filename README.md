@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.3.1.
+This documentation is for version 2.3.4.
 
 ## Migration guide from 2.2.x to 2.3.x
 Changes event names for storiesList instance
@@ -39,7 +39,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.1/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.4/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -212,7 +212,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.1/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.3.4/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
