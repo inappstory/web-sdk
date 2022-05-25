@@ -1,17 +1,17 @@
-<p align="center"><a href="https://inappstory.com" target="_blank" rel="noopener noreferrer"><img width="200" src="https://inappstory.com/images/logo.png" alt="InAppStory logo"></a></p>
+<p align="center"><a href="https://inappstory.ru" target="_blank" rel="noopener noreferrer"><img width="200" src="https://inappstory.ru/images/logo.png" alt="InAppStory logo"></a></p>
 
 
 # Story share page
 
 ## Introduction
 
-This guide explains how to create a page that handles `https://domain.com/s/{storyId}`
+This guide explains how to create a page that handles `https://domain.ru/s/{storyId}`
 
-URL template is configured in the [project settings](https://console.inappstory.com)
+URL template is configured in the [project settings](https://console.inappstory.ru)
 
 ## Get data for page layout
 
-API endpoint: `GET https://api.inappstory.com/v2/story-share-page-info/{storyId}`
+API endpoint: `GET https://api.inappstory.ru/v2/story-share-page-info/{storyId}`
 
 Bearer token is used for authentication - it is passed in the Authorization header: `Authorization: Bearer {token}`,
 where token - project integration key
@@ -31,7 +31,6 @@ The response body is a json object with the following fields:
 | title       | string | Story title |
 | description | string | Story description |
 | image       | object &#124; null | [Image](#story-share-page-image) |
-| story_data  | object | Internal data for Stories widget |
 
 ### Story share page image
 
@@ -82,7 +81,7 @@ The response body is a json object with the following fields:
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.1.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.ru/v2.3.1/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
