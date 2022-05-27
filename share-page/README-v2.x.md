@@ -118,6 +118,9 @@ The response body is a json object with the following fields:
       .setStoryReaderOptions({
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
+        sharePanel: {
+            targets: ["facebook", "twitter", "vk", "linkedin"]
+        }
       });
 
     // Show SharePage

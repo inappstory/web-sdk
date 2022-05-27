@@ -134,6 +134,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       .setStoryReaderOptions({
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
+        sharePanel: {
+            targets: ["facebook", "twitter", "vk", "linkedin"]
+        }
       }).setStoryFavoriteReaderOptions({
         title: {
             content: "Favorite",
@@ -250,6 +253,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       .setStoryReaderOptions({
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
+        sharePanel: {
+            targets: ["facebook", "twitter", "vk", "linkedin"]
+        }
       });
 
     // 4. Show onboarding example
@@ -365,6 +371,9 @@ appearanceManager.setCommonOptions({
   .setStoryReaderOptions({
     closeButtonPosition: 'right',
     scrollStyle: 'flat',
+    sharePanel: {
+        targets: ["facebook", "twitter", "vk", "linkedin"]
+    }
   });
 
 storyManager.showStory(125, appearanceManager).then(result => {
