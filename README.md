@@ -2,7 +2,14 @@
 
 # Stories Widget
 
-This documentation is for version 2.3.5.
+This documentation is for version 2.4.0.
+
+## Migration guide from 2.3.5 to 2.4.x
+The signature of the StoriesList constructor has changed
+2.3.5 version - constructor(mountSelector: string, appearanceManager: AppearanceManager, feedSlug?: string);
+2.4.0 version - constructor(mountSelector: string, appearanceManager: AppearanceManager, options?: {feed?: string, testKey?: string});
+
+
 
 ## Migration guide from 2.2.x to 2.3.x
 Changes event names for storiesList instance
@@ -39,7 +46,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.5/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -147,7 +154,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
     // mount and start StoriesList widget
     // #stories_widget - html element selectors
-    const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, "default");
+    const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, {feed: "default"});
 
     // 4. Override default loading animation
     storiesList.on('startLoad', loaderContainer => loaderContainer.style.background = 'url("https://inappstory.com/stories/loader.gif") center / 45px auto no-repeat transparent');
@@ -215,7 +222,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.3.5/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -474,13 +481,13 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 
 ## AppearanceManager - StoryReaderOptions
 
-| Variable                   | Type | Description                                                   |
-|----------------------------|------|---------------------------------------------------------------|
-| closeButtonPosition        | string | Close button position, one of `left`, `right`                 |
-| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube` |
-| loader.default.color       | string | Default loader primary color. Valid css color                 |
-| loader.default.accentColor | string | Default loader accent color. Valid css color                  |
-| sharePanel                 | object | [Options](#share-panel-options) for SharePanel. Since v2.3.5  |
+| Variable                   | Type | Description                                                         |
+|----------------------------|------|---------------------------------------------------------------------|
+| closeButtonPosition        | string | Close button position, one of `left`, `right`                       |
+| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube`      |
+| loader.default.color       | string | Default loader primary color. Valid css color. Default - white      |
+| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - transparent |
+| sharePanel                 | object | [Options](#share-panel-options) for SharePanel. Since v2.3.5        |
 
 ## Share panel options
 
@@ -630,5 +637,18 @@ status = {
     defaultListLength: 0,
     favoriteListLength: 0,
 };
+
+```
+
+## StoriesList testKey
+
+Use the key for seeing Stories with status "Moderation"
+The value of the key is stored in the IAS [console](https://console.inappstory.com)
+
+Usage example
+
+```js
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, {testKey: "key"});
 
 ```

@@ -81,7 +81,7 @@ The response body is a json object with the following fields:
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.ru/v2.3.5/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.ru/v2.4.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
