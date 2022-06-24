@@ -481,13 +481,15 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 
 ## AppearanceManager - StoryReaderOptions
 
-| Variable                   | Type | Description                                                         |
-|----------------------------|------|---------------------------------------------------------------------|
-| closeButtonPosition        | string | Close button position, one of `left`, `right`                       |
-| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube`      |
-| loader.default.color       | string | Default loader primary color. Valid css color. Default - white      |
-| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - transparent |
-| sharePanel                 | object | [Options](#share-panel-options) for SharePanel. Since v2.3.5        |
+| Variable                   | Type   | Description                                                                                  |
+|----------------------------|--------|----------------------------------------------------------------------------------------------|
+| closeButtonPosition        | string | Close button position, one of `left`, `right`                                                |
+| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube`                               |
+| loader.default.color       | string | Default loader primary color. Valid css color. Default - white                               |
+| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - transparent                          |
+| sharePanel                 | object | [Options](#share-panel-options) for SharePanel. Since v2.3.5                                 |
+| commonBackdrop             | object | [Options](#story-reader-backdrop-options) for StoryReader backdrop. Since v2.4.0             |
+| slideBackdrop              | object | [Options](#story-reader-slide-backdrop-options) for StoryReader slide backdrop. Since v2.4.0 |
 
 ## Share panel options
 
@@ -507,6 +509,79 @@ appearanceManager.setStoryReaderOptions({
     }
 });
 ```
+
+## Story reader backdrop options
+
+| Variable       | Type               | Description                                                                                            |
+|----------------|--------------------|--------------------------------------------------------------------------------------------------------|
+| color          | string             | StoryReader common backdrop - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `rgba(51,51,51,1)`  |
+| backdropFilter | string &#124; null | StoryReader common backdrop filter. Example - `blur(10px)`. Default null                               |
+
+
+## Story reader slide backdrop options
+
+| Variable               | Type          | Description                                                                                                                       |
+|------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| opacity                | number        | Slide based image backdrop - opacity value. Default `.56`                                                                         |
+| blur                   | number        | Slide based image backdrop - blur value. Default `30`                                                                             |
+| linearGradientOverlay  | Array<string> | Slide based image backdrop - Linear gradient overlay values. Default &#91;`rgba(0, 0, 0, 0.1) 0%`, `rgba(0, 0, 0, 0.9) 100%`&#93; |
+
+Examples
+```js
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// Copy of default config
+appearanceManager.setStoryReaderOptions({
+    commonBackdrop: {
+        color: "rgba(51, 51, 51, 1)",
+        backdropFilter: null
+    },
+    slideBackdrop: {
+        opacity: .56,
+        blur: 30,
+        linearGradientOverlay: [
+            "rgba(0, 0, 0, 0.1) 0%",
+            "rgba(0, 0, 0, 0.9) 100%"
+        ]
+    }
+});
+
+// Translucent config without slide based backdrop image
+appearanceManager.setStoryReaderOptions({
+    commonBackdrop: {
+        color: "rgba(51, 51, 51, .8)",
+        backdropFilter: null
+    },
+    slideBackdrop: {
+        opacity: 0,
+        blur: 30,
+        linearGradientOverlay: [
+            "rgba(0, 0, 0, 0.1) 0%",
+            "rgba(0, 0, 0, 0.9) 100%"
+        ]
+    }
+});
+
+// Translucent config without slide based backdrop image and parent screen blur effect
+appearanceManager.setStoryReaderOptions({
+    commonBackdrop: {
+        color: "rgba(51, 51, 51, .2)",
+        backdropFilter: "blur(5px)"
+    },
+    slideBackdrop: {
+        opacity: 0,
+        blur: 30,
+        linearGradientOverlay: [
+            "rgba(0, 0, 0, 0.1) 0%",
+            "rgba(0, 0, 0, 0.9) 100%"
+        ]
+    }
+});
+
+```
+
+
+
 
 ## AppearanceManager - StoryFavoriteReaderOptions
 since v2.3.1
