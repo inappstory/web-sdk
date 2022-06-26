@@ -394,90 +394,179 @@ storyManager.showStory(125, appearanceManager).then(result => {
 
 ## storyManagerConfig
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| apiKey       | string                           | Your project integration key |
-| userId       | string &#124; number &#124; null | User id |
-| tags         | Array<string> | Array of tags |
-| placeholders | object  | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
-| lang         | 'ru' &#124; 'en' | User locale |
+| Variable     | Type                             | Description                                                                           |
+|--------------|----------------------------------|---------------------------------------------------------------------------------------|
+| apiKey       | string                           | Your project integration key                                                          |
+| userId       | string &#124; number &#124; null | User id                                                                               |
+| tags         | Array<string>                    | Array of tags                                                                         |
+| placeholders | object                           | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
+| lang         | 'ru' &#124; 'en'                 | User locale                                                                           |
 
 ## AppearanceManager - StoriesListOptions
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| title          | object | [Slider title options](#slider-title-options) |
-| card           | object | [Slider card item options](#slider-card-options) |
-| favoriteCard   | object | [Slider favorite card additional options](#slider-favorite-card-additional-options) |
-| layout         | object | [Slider layout options](#slider-layout-options) |
-| sidePadding    | number | Slider side padding, `px`. Default 20 |
-| topPadding     | number | Slider top padding, `px`. Default 20 |
-| bottomPadding  | number | Slider bottom padding, `px`. Default 20 |
-| bottomMargin   | number | Slider bottom margin, `px`. Default 17 |
-| navigation     | object | [Slider navigation options](#slider-navigation-options) |
+| Variable      | Type   | Description                                                                         |
+|---------------|--------|-------------------------------------------------------------------------------------|
+| title         | object | [Slider title options](#slider-title-options)                                       |
+| card          | object | [Slider card item options](#slider-card-options)                                    |
+| favoriteCard  | object | [Slider favorite card additional options](#slider-favorite-card-additional-options) |
+| layout        | object | [Slider layout options](#slider-layout-options)                                     |
+| sidePadding   | number | Slider side padding, `px`. Default 20                                               |
+| topPadding    | number | Slider top padding, `px`. Default 20                                                |
+| bottomPadding | number | Slider bottom padding, `px`. Default 20                                             |
+| bottomMargin  | number | Slider bottom margin, `px`. Default 17                                              |
+| navigation    | object | [Slider navigation options](#slider-navigation-options)                             |
 
 ### Slider title options
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| content         | string &#124; null | Title text. Default null. Title block hidden when value is empty |
-| color           | string | CSS valid color value. Default `#ffffff` |
-| marginBottom    | number | Title block bottom margin, `px`. Default 20 |
-| font            | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `bold 20px/20px InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
+| Variable     | Type               | Description                                                                                                                                                                                                                                             |
+|--------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| content      | string &#124; null | Title text. Default null. Title block hidden when value is empty                                                                                                                                                                                        |
+| color        | string             | CSS valid color value. Default `#ffffff`                                                                                                                                                                                                                |
+| marginBottom | number             | Title block bottom margin, `px`. Default 20                                                                                                                                                                                                             |
+| font         | string             | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `bold 20px/20px InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
 
 ### Slider layout options
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| height          | number &#124; null | Slider total height, `px`. `0` - for auto height. Default `0` |
-| backgroundColor | string | Default `transparent` |
-| sliderAlign     | string | Horizontal align slider inside widget, variants: `left`, `center` and `right`. Default `left`. |
+| Variable        | Type               | Description                                                                                    |
+|-----------------|--------------------|------------------------------------------------------------------------------------------------|
+| height          | number &#124; null | Slider total height, `px`. `0` - for auto height. Default `0`                                  |
+| backgroundColor | string             | Default `transparent`                                                                          |
+| sliderAlign     | string             | Horizontal align slider inside widget, variants: `left`, `center` and `right`. Default `left`. |
 
 ### Slider card options
 
-| Variable        | Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|-----------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title           | object | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| title.display   | boolean | Determines whether to show the title or not                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| title.position  | string | Title position. Variants: `cardInsideBottom` (inside card, at bottom), `cardOutsideTop` (above the card) and `cardOutsideBottom`(under the card). Default - `cardInsideBottom`<br/> Note when using the `cardOutsideTop` or `cardOutsideBottom` option you must manually specify a [Slider layout height](#slider-layout-options) value. Usually this is the height of the card plus card title lineHeight * card title lineClamp + card title vertical padding |
-| title.textAlign | string | Text in title horizontal align, variants: `left`, `center` and `right`. Default `left`.                                                                                                                                                                                                                                                                                                                                                                         |
-| title.lineClamp | number | Numbers of text lines. Default 3.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| title.color     | string | CSS valid color value. Default `#ffffff`                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Variable        | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-----------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title           | object               | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| title.display   | boolean              | Determines whether to show the title or not                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| title.position  | string               | Title position. Variants: `cardInsideBottom` (inside card, at bottom), `cardOutsideTop` (above the card) and `cardOutsideBottom`(under the card). Default - `cardInsideBottom`<br/> Note when using the `cardOutsideTop` or `cardOutsideBottom` option you must manually specify a [Slider layout height](#slider-layout-options) value. Usually this is the height of the card plus card title lineHeight * card title lineClamp + card title vertical padding |
+| title.textAlign | string               | Text in title horizontal align, variants: `left`, `center` and `right`. Default `left`.                                                                                                                                                                                                                                                                                                                                                                         |
+| title.lineClamp | number               | Numbers of text lines. Default 3.                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| title.color     | string               | CSS valid color value. Default `#ffffff`                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | title.padding   | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15`                                                                                                                                                                                                                                                                                                                                                                 |
-| title.font      | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com).                                                                                                                                                                                                            | 
-| gap             | number | Space between cards, `px`. Default `10`                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| height          | number | Card height, `px`. Default `70`                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| variant         | string | Card style, one of `circle`, `quad`, `rectangle`. Default `circle`                                                                                                                                                                                                                                                                                                                                                                                              |
-| border          | object | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| border.radius   | number | Card border radius, `px`. Default `0`                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| border.color    | string | Card border color, valid css. Default `black`                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| border.width    | number | Card border width, `px`. Default `2`                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| border.gap      | number | Space between card and border, `px`. Default `3`                                                                                                                                                                                                                                                                                                                                                                                                                |
-| boxShadow       | string &#124; null | Card box-shadow, valid css value. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                |
-| opacity         | number | Card opacity. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| mask            | object &#124; null | Card mask - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                                                         |
-| opened          | object &#124; null | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `opened` state. Default all values null                                                                                                                                                                                                                                                                                                   |
+| title.font      | string               | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com).                                                                                                                                                                                                            | 
+| gap             | number               | Space between cards, `px`. Default `10`                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| height          | number               | Card height, `px`. Default `70`                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| variant         | string               | Card style, one of `circle`, `quad`, `rectangle`. Default `circle`                                                                                                                                                                                                                                                                                                                                                                                              |
+| border          | object               | See below                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| border.radius   | number               | Card border radius, `px`. Default `0`                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| border.color    | string               | Card border color, valid css. Default `black`                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| border.width    | number               | Card border width, `px`. Default `2`                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| border.gap      | number               | Space between card and border, `px`. Default `3`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| boxShadow       | string &#124; null   | Card box-shadow, valid css value. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| dropShadow      | string &#124; null   | Card drop-shadow, valid css value. Example - `1px 2px 8px rgba(34, 34, 34, 0.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                                |
+| opacity         | number               | Card opacity. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| mask            | object &#124; null   | Card mask - overlay between card image and title. CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                   |
+| svgMask         | object &#124; null   | [Options](#slider-card-svg-masked-overlay) for card overlay with svg masks. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                                        |
+| opened          | object &#124; null   | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `opened` state. Default all values null                                                                                                                                                                                                                                                                                                   |
+
+
+### Slider card svg masked overlay
+Used to create effects like in the screenshot below
+
+<style>
+figure {
+    border: thin #c0c0c0 solid;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    max-width: 400px;
+    /*margin: auto;*/
+}
+
+img, svg {
+    max-width: 400px;
+    max-height: 150px;
+    margin: 0 auto;
+    align-self: center;
+}
+
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+}
+
+</style>
+
+<figure>
+<img src="./images/SvgMaskedSample.png" alt="Story list card with svg masked overlay" width="380"/>
+<figcaption><a href="https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts">Live Demo</a></figcaption>
+</figure>
+
+| Variable    | Type                               | Description                                 |
+|-------------|------------------------------------|---------------------------------------------|
+| cardMask    | string &#124; null                 | Svg source. Default null.                   |
+| overlayMask | Array<OverlayMaskItem> &#124; null | Array of card overlay masks. Default null.  |
+
+
+type OverlayMaskItem
+
+| Variable   | Type               | Description                                                                                                       |
+|------------|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| mask       | string &#124; null | Svg source. Default null.                                                                                         |
+| background | string &#124; null | CSS color or any [background options](https://developer.mozilla.org/en-US/docs/Web/CSS/background). Default null. |
+
+Note
+Svg mask must match the size and shape of the card
+The transparent part of the mask will cut out the content below it
+svg tag should have width="100%" height="auto" and xmlns="http://www.w3.org/2000/svg" attributes
+
+Example
+```js
+// Properties are shown only for svg masks
+appearanceManager.setStoriesListOptions({
+    svgMask: {
+        cardMask: `<svg width="100%" height="auto" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M131 39C129 38 125.277 38 122 38C117.037 38 112.5 37 108.5 33.5C104.5 30 102 24.0824 102 18C102 14.5 102.5 11.5 100.5 8C94.5 2.5 82.416 0 70 0C31.3398 0 0 31.3401 0 70C0 108.66 31.3398 140 70 140C108.66 140 140 108.66 140 70C140 57.5848 137 45.5 131 39Z" fill="black"/>
+</svg>`,
+        overlayMask: [{
+            mask: `<svg width="100%" height="auto" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M129 21C129 26.5228 124.523 31 119 31C113.477 31 109 26.5228 109 21C109 15.4772 113.477 11 119 11C124.523 11 129 15.4772 129 21Z" fill="black"/>
+</svg>`,
+            background: "#F2473D",
+        }]
+    }
+});
+```
+<div style="display: flex;">
+<figure>
+<svg width="143px" height="143px" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black; margin: 10px;">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M131 39C129 38 125.277 38 122 38C117.037 38 112.5 37 108.5 33.5C104.5 30 102 24.0824 102 18C102 14.5 102.5 11.5 100.5 8C94.5 2.5 82.416 0 70 0C31.3398 0 0 31.3401 0 70C0 108.66 31.3398 140 70 140C108.66 140 140 108.66 140 70C140 57.5848 137 45.5 131 39Z" fill="black"/>
+</svg>
+<figcaption>Card mask</figcaption>
+</figure>
+<figure>
+<svg width="143px" height="143px" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black; margin: 10px;">
+<path d="M129 21C129 26.5228 124.523 31 119 31C113.477 31 109 26.5228 109 21C109 15.4772 113.477 11 119 11C124.523 11 129 15.4772 129 21Z" fill="black"/>
+</svg>
+<figcaption>Overlay mask</figcaption>
+</figure>
+</div>
+
 
 ### Slider favorite card additional options
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| title         | object | See below |
-| title.content | string | Card title |
-| title.color   | string | CSS valid color value. Default `#000000` |
-| title.padding | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15` |
-| title.font    | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
+| Variable      | Type                 | Description                                                                                                                                                                                                                                          |
+|---------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title         | object               | See below                                                                                                                                                                                                                                            |
+| title.content | string               | Card title                                                                                                                                                                                                                                           |
+| title.color   | string               | CSS valid color value. Default `#000000`                                                                                                                                                                                                             |
+| title.padding | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15`                                                                                                                                                      |
+| title.font    | string               | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
 
 ### Slider navigation options
 
 By default, controls are round buttons with arrow icons at the edges of the slider
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| showControls            | boolean | Enable slider controls. Default `false` |
-| controlsSize            | number |  Button size, `px`. Default `48` |
-| controlsBackgroundColor | string | CSS valid color value. Default `#ffffff` |
-| controlsColor           | string | CSS valid color value. Default `#000000` |
+| Variable                | Type        | Description                              |
+|-------------------------|-------------|------------------------------------------|
+| showControls            | boolean     | Enable slider controls. Default `false`  |
+| controlsSize            | number      | Button size, `px`. Default `48`          |
+| controlsBackgroundColor | string      | CSS valid color value. Default `#ffffff` |
+| controlsColor           | string      | CSS valid color value. Default `#000000` |
 
 ## AppearanceManager - StoryReaderOptions
 
