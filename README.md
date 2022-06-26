@@ -333,7 +333,12 @@ interface StoryManager {
 interface StoriesList {
   (mountSelector: string, appearanceManager: AppearanceManager, feedSlugOrId: string|number): StoriesList;
   reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
-  destroy(): void; // Destroy widget and return widget parent element (with mountSelector) styles to init state
+  
+  /**
+   * Destroy widget and return widget parent element (with mountSelector) styles to init state
+   * @since 2.4.0 
+   */
+  destroy(): void;
 }
 ```
 
