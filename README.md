@@ -462,23 +462,14 @@ storyManager.showStory(125, appearanceManager).then(result => {
 
 
 ### Slider card svg masked overlay
+Since v2.4.0
+
 Used to create effects like in the screenshot below
 
-<figure style="    border: thin #c0c0c0 solid;
-    display: flex;
-    flex-flow: column;
-    padding: 5px;
-    max-width: 400px;">
-<img src="./images/SvgMaskedSample.png" alt="Story list card with svg masked overlay" width="380" style="    max-width: 400px;
-    max-height: 150px;
-    margin: 0 auto;
-    align-self: center;"/>
-<figcaption style="    background-color: #222;
-    color: #fff;
-    font: italic smaller sans-serif;
-    padding: 3px;
-    text-align: center;"><a href="https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts" target="_blank">Live Demo</a></figcaption>
-</figure>
+<p><a href="https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts" target="_blank" rel="noopener noreferrer"><img width="400" src="./images/SvgMaskedSample.png" alt="Story list card with svg masked overlay"/></a></p>
+
+[Live Demo](https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts)
+
 
 | Variable    | Type                               | Description                                 |
 |-------------|------------------------------------|---------------------------------------------|
@@ -515,41 +506,12 @@ appearanceManager.setStoriesListOptions({
     }
 });
 ```
-<div style="display: flex;">
-<figure style="    border: thin #c0c0c0 solid;
-    display: flex;
-    flex-flow: column;
-    padding: 5px;
-    max-width: 400px;">
-<svg width="143px" height="143px" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black; margin: 10px;     max-width: 400px;
-    max-height: 150px;
-    align-self: center;">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M131 39C129 38 125.277 38 122 38C117.037 38 112.5 37 108.5 33.5C104.5 30 102 24.0824 102 18C102 14.5 102.5 11.5 100.5 8C94.5 2.5 82.416 0 70 0C31.3398 0 0 31.3401 0 70C0 108.66 31.3398 140 70 140C108.66 140 140 108.66 140 70C140 57.5848 137 45.5 131 39Z" fill="black"/>
-</svg>
-<figcaption style="    background-color: #222;
-    color: #fff;
-    font: italic smaller sans-serif;
-    padding: 3px;
-    text-align: center;">Card mask</figcaption>
-</figure>
 
-<figure style="    border: thin #c0c0c0 solid;
-    display: flex;
-    flex-flow: column;
-    padding: 5px;
-    max-width: 400px;">
-<svg width="143px" height="143px" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black; margin: 10px;     max-width: 400px;
-    max-height: 150px;
-    align-self: center;">
-<path d="M129 21C129 26.5228 124.523 31 119 31C113.477 31 109 26.5228 109 21C109 15.4772 113.477 11 119 11C124.523 11 129 15.4772 129 21Z" fill="black"/>
-</svg>
-<figcaption style="    background-color: #222;
-    color: #fff;
-    font: italic smaller sans-serif;
-    padding: 3px;
-    text-align: center;">Overlay mask</figcaption>
-</figure>
-</div>
+#### Card and overlay masks
+<p>
+    <img src="./images/CardMask.png" width="140" style="border: 1px solid black; margin: 10px; align-self: center;" alt="Card mask">
+    <img src="./images/OverlayMask.png" width="140" style="border: 1px solid black; margin: 10px; align-self: center;" alt="Overlay card mask">
+</p>
 
 
 ### Slider favorite card additional options
