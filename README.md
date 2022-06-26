@@ -325,12 +325,18 @@ interface StoryManager {
   once<K extends keyof EventPayloadDataNameMap>(event: K, listener: (payload: StoryManagerCallbackPayload<EventPayloadDataNameMap[K]>) => void): StoryManager;
 
 }
+```
 
+## StoriesList public methods
+
+```ts
 interface StoriesList {
   (mountSelector: string, appearanceManager: AppearanceManager, feedSlugOrId: string|number): StoriesList;
   reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
+  destroy(): void; // Destroy widget and return widget parent element (with mountSelector) styles to init state
 }
 ```
+
 
 ### StoryReader btnClickHandler example
 ```js
@@ -454,7 +460,7 @@ storyManager.showStory(125, appearanceManager).then(result => {
 | border.width    | number               | Card border width, `px`. Default `2`                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | border.gap      | number               | Space between card and border, `px`. Default `3`                                                                                                                                                                                                                                                                                                                                                                                                                |
 | boxShadow       | string &#124; null   | Card box-shadow, valid css value. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                |
-| dropShadow      | string &#124; null   | Card drop-shadow, valid css value. Example - `1px 2px 8px rgba(34, 34, 34, 0.3)`. Default `null`. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                              |
+| dropShadow      | string &#124; null   | Card drop-shadow, valid css value. Example - `1px 2px 8px rgba(34, 34, 34, 0.3)`. Default `null`. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                  |
 | opacity         | number               | Card opacity. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | mask            | object &#124; null   | Card mask - overlay between card image and title. CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                   |
 | svgMask         | object &#124; null   | [Options](#slider-card-svg-masked-overlay) for card overlay with svg masks. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                                        |
