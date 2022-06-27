@@ -477,9 +477,9 @@ Since v2.4.0
 
 Used to create effects like in the screenshot below
 
-<p><a href="https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts" target="_blank" rel="noopener noreferrer"><img width="400" src="./images/SvgMaskedSample.png" alt="Story list card with svg masked overlay"/></a></p>
+<p><a href="https://stackblitz.com/edit/angular-ivy-llsgys?file=src/app/app.component.ts" target="_blank" rel="noopener noreferrer"><img width="400" src="./images/SvgMaskedSample.png" alt="Story list card with svg masked overlay"/></a></p>
 
-[Live Demo](https://stackblitz.com/edit/angular-ivy-rcv1vf?file=src/app/app.component.ts)
+[Live Demo](https://stackblitz.com/edit/angular-ivy-llsgys?file=src/app/app.component.ts)
 
 
 | Variable    | Type                               | Description                                 |
@@ -520,8 +520,12 @@ appearanceManager.setStoriesListOptions({
 
 #### Card and overlay masks
 <p>
-    <img src="./images/CardMask.png" width="140" style="border: 1px solid black; margin: 10px; align-self: center;" alt="Card mask">
-    <img src="./images/OverlayMask.png" width="140" style="border: 1px solid black; margin: 10px; align-self: center;" alt="Overlay card mask">
+    <img src="./images/CardMask.png" width="140" alt="Card mask"><br/>
+    <span>Card mask</span>
+</p>
+<p>
+    <img src="./images/OverlayMask.png" width="140" alt="Overlay card mask"><br/>
+    <span>Overlay card mask</span>
 </p>
 
 
