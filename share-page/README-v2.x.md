@@ -261,7 +261,7 @@ export default Vue.extend({
 
         const script = [
             {
-                src: $config.storiesSdkBaseDomain + '/v2.1.0/dist/js/IAS.js'
+                src: $config.storiesSdkBaseDomain + '/v2.4.0/dist/js/IAS.js'
             }
         ];
 
