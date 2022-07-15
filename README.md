@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.0.
+This documentation is for version 2.4.2.
 
 ## Migration guide from 2.3.5 to 2.4.x
 The signature of the StoriesList constructor has changed
@@ -46,7 +46,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.2/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -66,6 +66,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       tags: [], // Array<string>
       placeholders: {
         user: "Guest"
+      },
+      imagePlaceholders: {
+        userAvatar: "image_url"
       },
       lang: "ru"
     };
@@ -222,7 +225,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.2/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -242,6 +245,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       tags: [], // Array<string>
       placeholders: {
         user: "Guest"
+      },
+      imagePlaceholders: {
+        userAvatar: "image_url"
       },
       lang: "ru"
     };
@@ -289,6 +295,7 @@ type StoryManagerConfig = {
   userId?: Optional<string|number>;
   tags?: Optional<Array<string>>;
   placeholders?: Optional<Dict<string>>;
+  imagePlaceholders?: Optional<Dict<string>>; // since v2.4.2
   lang?: Optional<'ru' | 'en'>;
 };
 
@@ -313,6 +320,7 @@ interface StoryManager {
   setUserId(userId: string | number): void;
   setLang(lang: 'ru' | 'en'): void;
   setPlaceholders(placeholders: Dict<string>): void;
+  setImagePlaceholders(imagePlaceholders: Dict<string>): void; // since v2.4.2
   showStory(id: number | string, appearanceManager: AppearanceManager): Promise<boolean>;
   closeStoryReader(): void;
   showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>): Promise<boolean>;
@@ -405,13 +413,14 @@ storyManager.showStory(125, appearanceManager).then(result => {
 
 ## storyManagerConfig
 
-| Variable     | Type                             | Description                                                                           |
-|--------------|----------------------------------|---------------------------------------------------------------------------------------|
-| apiKey       | string                           | Your project integration key                                                          |
-| userId       | string &#124; number &#124; null | User id                                                                               |
-| tags         | Array<string>                    | Array of tags                                                                         |
-| placeholders | object                           | Dict for replace placeholders inside story content or title. Example: {user: "Guest"} |
-| lang         | 'ru' &#124; 'en'                 | User locale                                                                           |
+| Variable          | Type                             | Description                                                                                                        |
+|-------------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| apiKey            | string                           | Your project integration key                                                                                       |
+| userId            | string &#124; number &#124; null | User id                                                                                                            |
+| tags              | Array<string>                    | Array of tags                                                                                                      |
+| placeholders      | object                           | Dict for replace placeholders inside story content or title. Example: {user: "Guest"}                              |
+| imagePlaceholders | object                           | Dict for replace imagePlaceholders inside story content or title. Example: {imgAvatar: "avatar_url"}. Since v2.4.2 |
+| lang              | 'ru' &#124; 'en'                 | User locale                                                                                                        |
 
 ## AppearanceManager - StoriesListOptions
 
