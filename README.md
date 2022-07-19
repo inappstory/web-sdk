@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.2.
+This documentation is for version 2.4.3.
 
 ## Migration guide from 2.3.5 to 2.4.x
 The signature of the StoriesList constructor has changed
@@ -46,7 +46,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.2/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.3/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -225,7 +225,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.2/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.3/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -686,7 +686,7 @@ storyManager.on('clickOnStory', payload => console.log(payload));
 | clickOnStory        | { ...commonFields, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list                                |
 | showStory           | { ...commonFields }                                                  | Show story (from slider or reader)                                  |
 | closeStory          | { ...commonFields, action: CloseAction }                             | Close story (from reader - transition from story or click on close) |
-| showSlide           | { ...commonFields, index: number }                                   | Show slide                                                          |
+| showSlide           | { ...commonFields, index: number, payload: string }                  | Show slide (payload - Slide additional payload, since v2.4.3)       |
 | clickOnButton       | { ...commonFields, index: number, url: string }                      | Click on button with external link                                  |
 | likeStory           | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story like         |
 | dislikeStory        | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story dislike      |
