@@ -354,6 +354,8 @@ interface StoriesList {
 ### StoryReader btnClickHandler example
 ```js
 storyManager.on("clickOnStoryLink", payload => {
+   // first close story reader
+   storyManager.closeStoryReader();
    const url = payload.data.url;
    if (url.indexOf('custom-schema://') === 0) {
        // run custom action
