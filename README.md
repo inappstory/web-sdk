@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.3.
+This documentation is for version 2.4.5.
 
 ## Migration guide from 2.3.5 to 2.4.x
 The signature of the StoriesList constructor has changed
@@ -46,7 +46,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.3/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.5/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -225,7 +225,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.3/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.5/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -563,15 +563,16 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 
 ## AppearanceManager - StoryReaderOptions
 
-| Variable                   | Type   | Description                                                                                  |
-|----------------------------|--------|----------------------------------------------------------------------------------------------|
-| closeButtonPosition        | string | Close button position, one of `left`, `right`                                                |
-| scrollStyle                | string | Stories viewPager scroll style, one of `flat`, `cover`, `cube`                               |
-| loader.default.color       | string | Default loader primary color. Valid css color. Default - white                               |
-| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - transparent                          |
-| sharePanel                 | object | [Options](#share-panel-options) for SharePanel. Since v2.3.5                                 |
-| commonBackdrop             | object | [Options](#story-reader-backdrop-options) for StoryReader backdrop. Since v2.4.0             |
-| slideBackdrop              | object | [Options](#story-reader-slide-backdrop-options) for StoryReader slide backdrop. Since v2.4.0 |
+| Variable                   | Type                    | Description                                                                                                    |
+|----------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------|
+| closeButtonPosition        | string                  | Close button position, one of `left`, `right`                                                                  |
+| scrollStyle                | string                  | Stories viewPager scroll style, one of `flat`, `cover`, `cube`                                                 |
+| loader.default.color       | string                  | Default loader primary color. Valid css color. Default - white                                                 |
+| loader.default.accentColor | string                  | Default loader accent color. Valid css color. Default - transparent                                            |
+| sharePanel                 | object                  | [Options](#share-panel-options) for SharePanel. Since v2.3.5                                                   |
+| commonBackdrop             | object                  | [Options](#story-reader-backdrop-options) for StoryReader backdrop. Since v2.4.0                               |
+| slideBackdrop              | object                  | [Options](#story-reader-slide-backdrop-options) for StoryReader slide backdrop. Since v2.4.0                   |
+| timelineBlockTopOffset     | number &#124; undefined | Configure timeline block top offset, `px` Default `5`. Also expands the backdrop below the block. Since v2.4.5 |
 
 ## Share panel options
 
