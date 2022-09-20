@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.6.
+This documentation is for version 2.4.7.
 
 ## Migration guide from 2.3.5 to 2.4.x
 The signature of the StoriesList constructor has changed
@@ -46,7 +46,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.6/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.7/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -225,7 +225,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.6/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.7/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -670,11 +670,14 @@ appearanceManager.setStoryReaderOptions({
 ## AppearanceManager - StoryFavoriteReaderOptions
 since v2.3.1
 
-| Variable       | Type | Description                                                                                                                                                                                                                                                |
-|----------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title.content  | string | Title text. Default value - "Favorite".                                                                                                                                                                                                                    |
-| title.color    | string | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
-| title.font     | string | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
+| Variable            | Type    | Description                                                                                                                                                                                                                                                |
+|---------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title.content       | string  | Title text. Default value - "Favorite".                                                                                                                                                                                                                    |
+| title.color         | string  | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
+| title.font          | string  | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
+| closeButtonPosition | ?string | Close button position, one of `left`, `right`. Default `right`                                                                                                                                                                                             | 
+| headerTopOffset     | ?number | Header top offset, `px` (with save bg color). Default `0`.                                                                                                                                                                                                 | 
+| bottomOffset        | ?number | Bottom offset, `px` (with save bg color). Default `0`.                                                                                                                                                                                                     | 
 
 
 ## StoryManager events
