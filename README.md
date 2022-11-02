@@ -2,7 +2,14 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.7.
+This documentation is for version 2.4.11.
+
+## Migration guide from 2.4.10 to 2.4.11
+The signature of storyManager.showOnboardingStories method has changed
+2.4.10 version - showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string);
+2.4.11 version - showOnboardingStories(appearanceManager: AppearanceManager, options?: {feed?: string, customTags?: string});
+
+
 
 ## Migration guide from 2.3.5 to 2.4.x
 The signature of the StoriesList constructor has changed
@@ -46,7 +53,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.7/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.11/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -168,9 +175,10 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     });
     
     // 5. Show onboarding example
-    // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string)
+    // showOnboardingStories(appearanceManager: AppearanceManager, {customTags?: string})
     // customTags - for override tags from storyManager
-    storyManager.showOnboardingStories(appearanceManager).then(result => {
+    // feed - for select another feed for onboarding (default feed - "onboarding")
+    storyManager.showOnboardingStories(appearanceManager, {feed: "extraOnboarding"}).then(result => {
        console.log({showOnboardingStoriesResult: result});
        // result: boolean - were onboarding or not
     });
@@ -225,7 +233,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.7/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.11/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -272,9 +280,10 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
       });
 
     // 4. Show onboarding example
-    // showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>)
-    // customTags - for override tags from storyManager
-    window.IAS.StoryManager.getInstance().showOnboardingStories(appearanceManager).then(result => {
+      // showOnboardingStories(appearanceManager: AppearanceManager, {customTags?: string})
+      // customTags - for override tags from storyManager
+      // feed - for select another feed for onboarding (default feed - "onboarding")
+    window.IAS.StoryManager.getInstance().showOnboardingStories(appearanceManager, {feed: "specialOnboarding"}).then(result => {
        console.log({showOnboardingStoriesResult: result});
        // result: boolean - were onboarding or not
     });
@@ -323,7 +332,8 @@ interface StoryManager {
   setImagePlaceholders(imagePlaceholders: Dict<string>): void; // since v2.4.2
   showStory(id: number | string, appearanceManager: AppearanceManager): Promise<boolean>;
   closeStoryReader(): void;
-  showOnboardingStories(appearanceManager: AppearanceManager, customTags?: Array<string>): Promise<boolean>;
+  // options.feed default value - "onboarding"
+  showOnboardingStories(appearanceManager: AppearanceManager, options?: {feed?: string, customTags?: Array<string>}): Promise<boolean>;
   
   // callbaks
   set storyLinkClickHandler(payload: StoryManagerCallbackPayload<{id: number, index: number, url: string}>);
@@ -596,10 +606,10 @@ appearanceManager.setStoryReaderOptions({
 
 ## Story reader backdrop options
 
-| Variable       | Type               | Description                                                                                            |
-|----------------|--------------------|--------------------------------------------------------------------------------------------------------|
-| color          | string             | StoryReader common backdrop - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `rgba(51,51,51,1)`  |
-| backdropFilter | string &#124; null | StoryReader common backdrop filter. Example - `blur(10px)`. Default null                               |
+| Variable       | Type               | Description                                                                                        |
+|----------------|--------------------|----------------------------------------------------------------------------------------------------|
+| color          | string             | StoryReader common backdrop - CSS valid color. Example - `rgba(0,0,0,.3)`. Default `rgba(0,0,0,1)` |
+| backdropFilter | string &#124; null | StoryReader common backdrop filter. Example - `blur(10px)`. Default null                           |
 
 
 ## Story reader slide backdrop options
