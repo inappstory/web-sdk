@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.11.
+This documentation is for version 2.4.12.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -53,7 +53,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.11/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.12/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -233,7 +233,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.11/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.4.12/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -333,7 +333,8 @@ interface StoryManager {
   showStory(id: number | string, appearanceManager: AppearanceManager): Promise<boolean>;
   closeStoryReader(): void;
   // options.feed default value - "onboarding"
-  showOnboardingStories(appearanceManager: AppearanceManager, options?: {feed?: string, customTags?: Array<string>}): Promise<boolean>;
+  //   options.limit - number, > 0, since v2.4.12
+  showOnboardingStories(appearanceManager: AppearanceManager, options?: {feed?: string, customTags?: Array<string>, limit?: number}): Promise<boolean>;
   
   // callbaks
   set storyLinkClickHandler(payload: StoryManagerCallbackPayload<{id: number, index: number, url: string}>);
