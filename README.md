@@ -448,7 +448,7 @@ storyManager.showStory(125, appearanceManager).then(result => {
 | bottomPadding | number | Slider bottom padding, `px`. Default 20                                             |
 | bottomMargin  | number | Slider bottom margin, `px`. Default 17                                              |
 | navigation    | object | [Slider navigation options](#slider-navigation-options)                             |
-| extraCss      | string | [Customize slider css](#сustomize-slider-css)                                       |
+| extraCss      | string | [Customize slider css](#customize-slider-css)                                       |
 
 ### Slider title options
 
