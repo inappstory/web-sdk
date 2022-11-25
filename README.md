@@ -448,6 +448,7 @@ storyManager.showStory(125, appearanceManager).then(result => {
 | bottomPadding | number | Slider bottom padding, `px`. Default 20                                             |
 | bottomMargin  | number | Slider bottom margin, `px`. Default 17                                              |
 | navigation    | object | [Slider navigation options](#slider-navigation-options)                             |
+| extraCss      | string | [Customize slider css](#сustomize-slider-css)                                       |
 
 ### Slider title options
 
@@ -571,6 +572,56 @@ By default, controls are round buttons with arrow icons at the edges of the slid
 | controlsSize            | number      | Button size, `px`. Default `48`          |
 | controlsBackgroundColor | string      | CSS valid color value. Default `#ffffff` |
 | controlsColor           | string      | CSS valid color value. Default `#000000` |
+
+### Customize slider css
+
+Used for more complex customization of the slider appearance
+
+Example with customization of navigation elements 
+```js
+appearanceManager.setStoriesListOptions({
+    navigation: {
+        showControls: true,
+        controlsSize: 48,
+        controlsBackgroundColor: 'white',
+        controlsColor: 'black'
+    },
+    extraCss: `
+        .stories-list-controls .control {
+        background-color: transparent!important;
+        width: 16px!important;
+        height: 17px!important;
+        }
+        
+        .stories-list-controls .control-left {
+        bottom: 35px!important;
+        left: 0!important;
+        }
+        .stories-list-controls .control-right {
+        bottom: 35px!important;
+        left: 34px!important;
+        }
+        .stories-list-controls .control-icon {
+        background-color: #DCDCDC!important;
+        width: 16px!important;
+        height: 17px!important;
+        }
+        .stories-list-controls .control.active .control-icon {
+        background-color: #0C62F3!important;
+        }
+        
+        .stories-list-controls .control-left .control-icon {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.30078 15.9141L9.00391 15.2461C9.17969 15.0703 9.17969 14.7891 9.00391 14.6484L3.55469 9.16406H15.5781C15.7891 9.16406 16 8.98828 16 8.74219V7.75781C16 7.54688 15.7891 7.33594 15.5781 7.33594H3.55469L9.00391 1.88672C9.17969 1.74609 9.17969 1.46484 9.00391 1.28906L8.30078 0.621094C8.16016 0.445312 7.87891 0.445312 7.70312 0.621094L0.355469 7.96875C0.179688 8.14453 0.179688 8.39062 0.355469 8.56641L7.70312 15.9141C7.87891 16.0898 8.16016 16.0898 8.30078 15.9141Z' fill='currentColor'/%3E%3C/svg%3E%0A")!important;
+        mask-image: url("data:image/svg+xml,%3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.30078 15.9141L9.00391 15.2461C9.17969 15.0703 9.17969 14.7891 9.00391 14.6484L3.55469 9.16406H15.5781C15.7891 9.16406 16 8.98828 16 8.74219V7.75781C16 7.54688 15.7891 7.33594 15.5781 7.33594H3.55469L9.00391 1.88672C9.17969 1.74609 9.17969 1.46484 9.00391 1.28906L8.30078 0.621094C8.16016 0.445312 7.87891 0.445312 7.70312 0.621094L0.355469 7.96875C0.179688 8.14453 0.179688 8.39062 0.355469 8.56641L7.70312 15.9141C7.87891 16.0898 8.16016 16.0898 8.30078 15.9141Z' fill='currentColor'/%3E%3C/svg%3E%0A")!important;
+        }
+        
+        .stories-list-controls .control-right .control-icon {
+        -webkit-mask-image: url("data:image/svg+xml, %3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.91406 0.621094L7.21094 1.28906C7.03516 1.46484 7.03516 1.74609 7.21094 1.88672L12.6602 7.33594H0.671875C0.425781 7.33594 0.25 7.54688 0.25 7.75781V8.74219C0.25 8.98828 0.425781 9.16406 0.671875 9.16406H12.6602L7.21094 14.6484C7.03516 14.7891 7.03516 15.0703 7.21094 15.2461L7.91406 15.9141C8.05469 16.0898 8.33594 16.0898 8.51172 15.9141L15.8594 8.56641C16.0352 8.39062 16.0352 8.14453 15.8594 7.96875L8.51172 0.621094C8.33594 0.445312 8.05469 0.445312 7.91406 0.621094Z' fill='currentColor'/%3E%3C/svg%3E")!important;
+        mask-image: url("data:image/svg+xml, %3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.91406 0.621094L7.21094 1.28906C7.03516 1.46484 7.03516 1.74609 7.21094 1.88672L12.6602 7.33594H0.671875C0.425781 7.33594 0.25 7.54688 0.25 7.75781V8.74219C0.25 8.98828 0.425781 9.16406 0.671875 9.16406H12.6602L7.21094 14.6484C7.03516 14.7891 7.03516 15.0703 7.21094 15.2461L7.91406 15.9141C8.05469 16.0898 8.33594 16.0898 8.51172 15.9141L15.8594 8.56641C16.0352 8.39062 16.0352 8.14453 15.8594 7.96875L8.51172 0.621094C8.33594 0.445312 8.05469 0.445312 7.91406 0.621094Z' fill='currentColor'/%3E%3C/svg%3E")!important;
+        }
+        `
+});
+```
 
 ## AppearanceManager - StoryReaderOptions
 
