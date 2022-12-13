@@ -26,19 +26,28 @@ The response body is a json object with the following fields:
 
 ### Story share page data
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| title       | string | Story title |
-| description | string | Story description |
+| Variable    | Type               | Description                      |
+|-------------|--------------------|----------------------------------|
+| title       | string             | Story title                      |
+| description | string             | Story description                |
 | image       | object &#124; null | [Image](#story-share-page-image) |
+| video       | object &#124; null | [Video](#story-share-page-video) |
 
 ### Story share page image
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| url | string | Image url |
-| width | number | Image width, `px` |
-| height | number | Image height, `px` |
+| Variable | Type   | Description        |
+|----------|--------|--------------------|
+| url      | string | Image url          |
+| width    | number | Image width, `px`  |
+| height   | number | Image height, `px` |
+
+### Story share page video
+
+| Variable | Type   | Description        |
+|----------|--------|--------------------|
+| url      | string | Video url          |
+| width    | number | Video width, `px`  |
+| height   | number | Video height, `px` |
 
 ## Page layout
 
@@ -50,13 +59,16 @@ The response body is a json object with the following fields:
     <title>{title}</title>
     <meta name="title" content="{title}">
     <meta name="description" content="{description}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{og_type}">
     <meta property="og:url" content="{url}">
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{description}">
     <meta property="og:image" content="{image_url}">
     <meta property="og:image:width" content="{image_width}">
     <meta property="og:image:height" content="{image_height}">
+    <meta property="og:video" content="{video_url}">
+    <meta property="og:video:width" content="{video_width}">
+    <meta property="og:video:height" content="{video_height}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{title}">
     <meta name="twitter:description" content="{description}">
@@ -65,10 +77,12 @@ The response body is a json object with the following fields:
     <meta name="twitter:image" content="{image_url}">
     <meta property="og:site_name" content="{site_name}">
 
-    <!-- image_url, image_width, image_height - one of images from API response -->
+    <!-- image_url, image_width, image_height - image object from API response -->
+    <!-- video_url, video_width, video_height - video object from API response (if not null) -->
     <!-- url - canonical page url -->
     <!-- title, description - from API response -->
     <!-- twitter_username, site_name - if need it -->
+    <!-- og_type, "video.other" if video exists, "website" otherwise -->
 </head>
 <body>
 
