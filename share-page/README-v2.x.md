@@ -248,7 +248,9 @@ export default Vue.extend({
 
         const title = data.title
         const description = data.description
+        const keywords = data.keywords
         const image = data.image
+        const video = data.video
 
         const url = req?.headers.host;
 
@@ -256,10 +258,20 @@ export default Vue.extend({
         let imageWidth = null
         let imageHeight = null
 
-        if (image !== null) {
-              imageUrl = image.url
-              imageWidth = image.width
-              imageHeight = image.height
+        if (image != null) {
+            imageUrl = image.url
+            imageWidth = image.width
+            imageHeight = image.height
+        }
+        
+        let videoUrl = null
+        let videoWidth = null
+        let videoHeight = null
+
+        if (video != null) {
+            videoUrl = video.url
+            videoWidth = video.width
+            videoHeight = video.height
         }
 
         const script = [
@@ -267,25 +279,37 @@ export default Vue.extend({
                 src: $config.storiesSdkBaseDomain + '/v2.4.12/dist/js/IAS.js'
             }
         ];
+        
+        let ogType = 'website';
 
         let meta = [
-            {property: 'og:type', content: 'website'},
             {property: 'og:url', content: url},
             {property: 'og:title', content: title},
             {property: 'og:description', content: description},
+            {property: 'og:keywords', content: keywords},
 
             {property: 'twitter:card', content: 'summary_large_image'},
             {property: 'twitter:title', content: title},
             {property: 'twitter:url', content: url},
         ];
 
-        if (imageUrl !== null) {
+        if (imageUrl != null) {
             meta.push({property: 'og:image', content: imageUrl});
             meta.push({property: 'og:image:width', content: imageWidth});
             meta.push({property: 'og:image:height', content: imageHeight});
 
             meta.push({property: 'twitter:image', content: imageUrl});
         }
+        
+        if (videoUrl != null) {
+            meta.push({property: 'og:video', content: videoUrl});
+            meta.push({property: 'og:video:width', content: videoWidth});
+            meta.push({property: 'og:video:height', content: videoHeight});
+
+            ogType = 'video.other';
+        }
+
+        meta.push({property: 'og:type', content: ogType});
 
         return {
             title, description, imageUrl, imageWidth, imageHeight, url, script, meta
