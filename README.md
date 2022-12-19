@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.4.12.
+This documentation is for version 2.5.0.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -39,6 +39,10 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
 
 ```html
 <!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+
 <html>
 <body>
 <!-- 1. The <iframe> (and Stories` widget) will be mounted to this <div> tag -->
@@ -53,8 +57,9 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.12/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.5.0/dist/js/IAS.js";
     js.async = true;
+    js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
     st.ready = function (f) {
@@ -233,7 +238,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.4.12/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.5.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -350,7 +355,7 @@ interface StoryManager {
 
 ```ts
 interface StoriesList {
-  (mountSelector: string, appearanceManager: AppearanceManager, feedSlugOrId: string|number): StoriesList;
+  (mountSelector: string, appearanceManager: AppearanceManager, options: {feed?: string|number, testKey?: string}): StoriesList;
   reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
   
   /**
@@ -359,6 +364,55 @@ interface StoriesList {
    */
   destroy(): void;
 }
+```
+
+## UGCStoriesList public methods
+
+```ts
+interface UGCStoriesList {
+  (mountSelector: string, appearanceManager: AppearanceManager, options: {filter: Record<string, any>}): StoriesList;
+  reload(options: {needLoader: boolean} = {needLoader: true}): Promise<boolean>;
+  destroy(): void;
+}
+```
+
+## UGCStoriesList example
+
+```ts
+// StoryManager singleton instance
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+
+// or get previously created (from page layout for example)
+// const storyManager = window.IAS.StoryManager.getInstance();
+
+// AppearanceManager instance
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// List instance
+const storiesList = new storyManager.UGCStoriesList("#stories_widget", appearanceManager, {filter: {prop1: "a", prop2: "b"}});
+
+// subscribe on events
+const publicEvents = ['clickOnStory', 'showSlide', 'showStory', 'closeStory', 'clickOnButton', 'likeStory', 'dislikeStory', 'favoriteStory', 'shareStory', 'shareStoryWithPath', 'clickOnFavoriteCell'];
+publicEvents.forEach((eventName) => storyManager.on(eventName, (payload) => console.log("event", eventName, payload)));
+
+// payload for all events from UGCStoiesList and StoryReader (for stories from UGCStoiesList)
+type Payload = {
+    id: number,
+    index: number,
+    isDeeplink: boolean,
+    title: string,
+    slidesCount: number,
+    feed: null,
+    filter: Record<string, any>,
+    source: "list"
+}
+
+// subscribe and unsubscribe from event
+const handler = (payload) => console.log("event", payload);
+storyManager.on("storyManager", payload); // subscribe
+storyManager.off("storyManager", payload); // unsubscribe
+
+
 ```
 
 
