@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.5.3.
+This documentation is for version 2.5.4.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -57,7 +57,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.5.3/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.5.4/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -238,7 +238,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.5.3/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.5.4/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -343,6 +343,16 @@ interface StoryManager {
   
   // callbaks
   set storyLinkClickHandler(payload: StoryManagerCallbackPayload<{id: number, index: number, url: string}>);
+
+  // StoryManager property, you can set a callback that will be called before opening the reader
+  onBeforeStoryReaderOpen: Option<() => Promise<void>>; // since v2.5.4
+  //  callback that will be called after the reader is closed
+  onStoryReaderClosed: Option<() => void>; // since v2.5.4
+
+  // StoryManager property, you can set a callback that will be called before opening the favorites reader
+  onBeforeFavoriteReaderOpen: Option<() => Promise<void>>; // since v2.5.4
+  // callback that will be called after the reader is closed 
+  onStoryReaderClosed: Option<() => void>; // since v2.5.4
   
   // events
   on<K extends keyof EventPayloadDataNameMap>(event: K, listener: (payload: StoryManagerCallbackPayload<EventPayloadDataNameMap[K]>) => void): StoryManager;
@@ -350,6 +360,7 @@ interface StoryManager {
 
 }
 ```
+[onBeforeStoryReaderOpen usage example](#onbeforestoryreaderopen-example)
 
 ## StoriesList public methods
 
@@ -472,6 +483,69 @@ appearanceManager.setCommonOptions({
 storyManager.showStory(125, appearanceManager).then(result => {
   console.log({showStoryResult: result});
 });
+
+```
+
+### OnBeforeStoryReaderOpen example
+```js
+
+// StoryManager singleton instance
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+
+// or get previously created (from page layout for example)
+const storyManager = window.IAS.StoryManager.getInstance();
+
+// AppearanceManager instance
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// appearance config
+appearanceManager.setCommonOptions({
+  hasLike: true,
+  hasFavorite: true
+})
+  .setStoryReaderOptions({
+    closeButtonPosition: 'right',
+    scrollStyle: 'flat',
+    sharePanel: {
+        targets: ["facebook", "twitter", "vk", "linkedin"]
+    }
+  });
+
+const hideAppTabBar = () => new Promise(resolve => {
+    // ...
+    resolve();
+});
+const showAppTabBar = () => true;
+let isAnyReaderOpen = false;
+let isFavoriteReaderOpen = false;
+storyManager.onBeforeStoryReaderOpen = async () => {
+    if (!isAnyReaderOpen) {
+        isAnyReaderOpen = true;
+        // wait for action
+        await hideAppTabBar();
+    }
+};
+storyManager.onBeforeFavoriteReaderOpen = async () => {
+    isFavoriteReaderOpen = true;
+    if (!isAnyReaderOpen) {
+        isAnyReaderOpen = true;
+        // wait for action
+        await hideAppTabBar();
+    }
+};
+
+storyManager.onStoryReaderClosed = () => {
+    if (isFavoriteReaderOpen) return;
+    isAnyReaderOpen = false;
+    showAppTabBar();
+};
+storyManager.onFavoriteReaderClosed = () => {
+    isFavoriteReaderOpen = false;
+    isAnyReaderOpen = false;
+    showAppTabBar();
+};
+
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager);
 
 ```
 
