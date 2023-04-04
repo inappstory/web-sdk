@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.5.6.
+This documentation is for version 2.6.0.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -57,7 +57,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.5.6/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.6.0/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -1104,5 +1104,85 @@ Usage example
 ```js
 const storyManager = new window.IAS.StoryManager(storyManagerConfig);
 const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, {testKey: "key"});
+
+```
+
+## React UgcSdk example
+```js
+
+import { UgcEditor, UgcSdk } from "@inappstory/react-ugc-sdk";
+
+function App() {
+    return (
+        <div className="App">
+
+            // Container for UgcSdk screen
+            <UgcEditor safeAreaInsets={{top: 0, bottom: 0}}/>
+        </div>
+    );
+}
+
+
+const storyManagerConfig = {
+    apiKey: "{project-integration-key}",
+    userId: "kdijhud4454d", // usually - hash from real user identifier
+    tags: [], // Array<string>
+    placeholders: {
+        user: "Guest"
+    },
+    imagePlaceholders: {
+        userAvatar: "image_url"
+    },
+    lang: "ru",
+    UgcSdk // linking WebSdk and UgcSdk
+};
+
+// StoryManager singleton instance
+const storyManager = new window.IAS.StoryManager(storyManagerConfig);
+
+// AppearanceManager instance
+const appearanceManager = new window.IAS.AppearanceManager();
+
+appearanceManager.setStoriesListOptions({
+    ugcCard: {
+        title: {
+            content: "UGC",
+            color: 'black',
+            font: '14px/16px "Segoe UI Semibold"',
+            padding: 8
+        },
+        gap: 10,
+        height: 100,
+        variant: 'rectangle',
+        border: {
+            radius: 16,
+            color: 'transparent',
+            width: 0,
+            gap: 0,
+        },
+        boxShadow: null,
+        opacity: 1,
+        mask: {
+            color: 'rgba(0, 0, 0, 0)'
+        },
+        backgroundColor: "blue",
+        image: {
+            svgSrc: {
+                baseState: `<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 85.5C69.6061 85.5 85.5 69.6061 85.5 50C85.5 30.3939 69.6061 14.5 50 14.5C30.3939 14.5 14.5 30.3939 14.5 50C14.5 69.6061 30.3939 85.5 50 85.5Z" stroke="white" stroke-width="2"/>
+<path d="M50.5 34.5V65.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M34.5 49.5H65.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+            }
+        },
+    },
+});
+
+// use ugc card in list
+const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, {useUgcCard: true});
+
+
+
 
 ```
