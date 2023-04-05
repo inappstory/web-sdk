@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.6.0.
+This documentation is for version 2.6.1.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -57,7 +57,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.6.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.6.1/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -190,7 +190,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     // or window.IAS.StoryManager.getInstance()
       
     // 6. Add events for internal statistics (optional)
-    const publicEvents = ['clickOnStory', 'showSlide', 'showStory', 'closeStory', 'clickOnButton', 'likeStory', 'dislikeStory', 'favoriteStory', 'shareStory', 'shareStoryWithPath'];
+    const publicEvents = ['clickOnStory', 'showSlide', 'showStory', 'closeStory', 'clickOnButton', 'likeStory', 'dislikeStory', 'favoriteStory', 'shareStory', 'shareStoryWithPath', 'feedLoad', 'feedImpression'];
     publicEvents.forEach((eventName) => storyManager.on(eventName, (payload) => console.log("event", eventName, payload)));
 
 
@@ -980,19 +980,21 @@ const storyManager = new window.IAS.StoryManager(storyManagerConfig);
 storyManager.on('clickOnStory', payload => console.log(payload));
 ```
 
-| Name                | Payload                                                              | Description                                                         |
-|---------------------|----------------------------------------------------------------------|---------------------------------------------------------------------|
-| clickOnStory        | { ...commonFields, index: number, isDeeplink: boolean, url?: string} | Click on story card from slider list                                |
-| showStory           | { ...commonFields }                                                  | Show story (from slider or reader)                                  |
-| closeStory          | { ...commonFields, action: CloseAction }                             | Close story (from reader - transition from story or click on close) |
-| showSlide           | { ...commonFields, index: number, payload: string }                  | Show slide (payload - Slide additional payload, since v2.4.3)       |
-| clickOnButton       | { ...commonFields, index: number, url: string }                      | Click on button with external link                                  |
-| likeStory           | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story like         |
-| dislikeStory        | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story dislike      |
-| favoriteStory       | { ...commonFields, value: boolean }                                  | Click to set (value=true) or unset (value=false) story dislike      |
-| shareStory          | { ...commonFields }                                                  | Click on story sharing                                              |
-| shareStoryWithPath  | { ...commonFields, url: string }                                     | Event after successful creation of the sharing path                 |
-| clickOnFavoriteCell | { feed: string }                                                     | Event after successful creation of the sharing path                 |
+| Name                | Payload                                                                                                   | Description                                                         |
+|---------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| clickOnStory        | { ...commonFields, index: number, isDeeplink: boolean, url?: string}                                      | Click on story card from slider list                                |
+| showStory           | { ...commonFields }                                                                                       | Show story (from slider or reader)                                  |
+| closeStory          | { ...commonFields, action: CloseAction }                                                                  | Close story (from reader - transition from story or click on close) |
+| showSlide           | { ...commonFields, index: number, payload: string }                                                       | Show slide (payload - Slide additional payload, since v2.4.3)       |
+| clickOnButton       | { ...commonFields, index: number, url: string }                                                           | Click on button with external link                                  |
+| likeStory           | { ...commonFields, value: boolean }                                                                       | Click to set (value=true) or unset (value=false) story like         |
+| dislikeStory        | { ...commonFields, value: boolean }                                                                       | Click to set (value=true) or unset (value=false) story dislike      |
+| favoriteStory       | { ...commonFields, value: boolean }                                                                       | Click to set (value=true) or unset (value=false) story dislike      |
+| shareStory          | { ...commonFields }                                                                                       | Click on story sharing                                              |
+| shareStoryWithPath  | { ...commonFields, url: string }                                                                          | Event after successful creation of the sharing path                 |
+| clickOnFavoriteCell | { feed: string }                                                                                          | Event after successful creation of the sharing path                 |
+| feedLoad            | { feed: string, stories: Array<{ id: number, title: string, tags: Array<string>, slidesCount: number }> } | Event after successful feed data load. Since v2.6.1                 |
+| feedImpression      | { feed: string, stories: Array<{ id: number, title: string, tags: Array<string>, slidesCount: number }> } | Event after stories appear in the viewport. Since v2.6.1            |
 
 ```ts
 type Option<T> = T | null;
