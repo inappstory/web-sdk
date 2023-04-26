@@ -427,18 +427,32 @@ storyManager.off("storyManager", payload); // unsubscribe
 ```
 
 
-### StoryReader btnClickHandler example
+### StoryReader example of overriding the default behavior of a button
+By default, the button from stories opens the link in the current window - window.open(url, '_self')
+The default behavior can be overridden by setting the storyLinkClickHandler handler or the clickOnStoryLink event handler
+
 ```js
-storyManager.on("clickOnStoryLink", payload => {
-   // first close story reader
-   storyManager.closeStoryReader();
-   const url = payload.data.url;
-   if (url.indexOf('custom-schema://') === 0) {
-       // run custom action
-   } else {
-     window.open(url, '_self');
-   }
-});
+const urlHandler = ({ data }) => {
+    // first close story reader (in the case of PWA for instance)
+    storyManager.closeStoryReader();
+    
+    if (data.url.indexOf('custom-schema://') === 0) {
+        // run custom action
+    } else {
+        // open url in the current window
+        window.open(data.url, '_self');
+        // or in the new window
+        // window.open(url, '_blank');
+    }
+};
+
+// set clickOnStoryLink event handler
+storyManager.on("clickOnStoryLink", urlHandler);
+// and remove on component destroy
+// storyManager.off("clickOnStoryLink", urlHandler);
+
+// or storyLinkClickHandler (if this option is more convenient)
+// storyManager.storyLinkClickHandler = urlHandler;
 
 ```
 
@@ -973,7 +987,7 @@ since v2.3.1
 
 
 ## StoryManager events
-
+These events are for analytics purposes only
 You can subscribe to events after creating the widget instance
 ```js
 const storyManager = new window.IAS.StoryManager(storyManagerConfig);
