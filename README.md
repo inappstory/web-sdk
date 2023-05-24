@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.6.3.
+This documentation is for version 2.6.4.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -57,7 +57,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.6.3/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.6.4/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -988,6 +988,33 @@ since v2.3.1
 | closeButtonPosition | ?string | Close button position, one of `left`, `right`. Default `right`. Since 2.4.7                                                                                                                                                                                | 
 | headerTopOffset     | ?number | Header top offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                     | 
 | bottomOffset        | ?number | Bottom offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                         | 
+
+
+
+
+## AppearanceManager - GameReaderOptions
+since v2.6.4
+
+| Variable                   | Type   | Description                                                      |
+|----------------------------|--------|------------------------------------------------------------------|
+| loader.default.color       | string | Default loader primary color. Valid css color. Default - #D3DAE6 |
+| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - #006BB4  |
+
+Examples
+```js
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// set GameReader loader white color with transparent accentColor
+appearanceManager.setGameReaderOptions({
+    loader: {
+        default: {
+            color: "white",
+            accentColor: "transparent"
+        }
+    }
+});
+
+```
 
 
 ## StoryManager events
