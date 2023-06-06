@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.6.4.
+This documentation is for version 2.6.6.
 
 ## Migration guide from 2.4.10 to 2.4.11
 The signature of storyManager.showOnboardingStories method has changed
@@ -57,7 +57,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.6.4/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.6.6/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -163,8 +163,10 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         title: {
             content: "Favorite",
             color: "white",
-            font: "14px/16px InternalPrimaryFont"
-        }
+            font: "14px/16px InternalPrimaryFont",
+            backgroundColor: "#333333"
+        },
+        backgroundColor: "#333333"
     });
 
     // mount and start StoriesList widget
@@ -980,14 +982,16 @@ appearanceManager.setStoryReaderOptions({
 ## AppearanceManager - StoryFavoriteReaderOptions
 since v2.3.1
 
-| Variable            | Type    | Description                                                                                                                                                                                                                                                |
-|---------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title.content       | string  | Title text. Default value - "Favorite".                                                                                                                                                                                                                    |
-| title.color         | string  | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
-| title.font          | string  | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
-| closeButtonPosition | ?string | Close button position, one of `left`, `right`. Default `right`. Since 2.4.7                                                                                                                                                                                | 
-| headerTopOffset     | ?number | Header top offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                     | 
-| bottomOffset        | ?number | Bottom offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                         | 
+| Variable              | Type    | Description                                                                                                                                                                                                                                                |
+|-----------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title.content         | string  | Title text. Default value - "Favorite".                                                                                                                                                                                                                    |
+| title.color           | string  | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
+| title.font            | string  | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
+| title.backgroundColor | string  | StoryFavoriteReader header bg color. CSS valid color value. Default `#333333`. Since v2.6.6                                                                                                                                                                | 
+| closeButtonPosition   | ?string | Close button position, one of `left`, `right`. Default `right`. Since 2.4.7                                                                                                                                                                                | 
+| headerTopOffset       | ?number | Header top offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                     | 
+| bottomOffset          | ?number | Bottom offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                         | 
+| backgroundColor       | ?number | StoryFavoriteReader body bg color. CSS valid color value. Default `#333333`. Since v2.6.6                                                                                                                                                                  | 
 
 
 
@@ -1017,8 +1021,102 @@ appearanceManager.setGameReaderOptions({
 ```
 
 
+
+## AppearanceManager - OptionsOverrideByMediaQuery
+since v2.6.6\
+All options setter (commonOptions, storiesListOptions, storyReaderOptions, storyFavoriteReaderOptions, goodsWidgetOptions, gameReaderOptions) 
+triggers View update in runtime.\
+AppearanceManager.setOptionsOverrideByMediaQuery - defines rules for applying settings for different screen sizes 
+```ts
+type AppearanceManagerOptionGroups = {
+    commonOptions: Record<string, any>,
+    storiesListOptions: Record<string, any>,
+    storyReaderOptions: Record<string, any>,
+    storyFavoriteReaderOptions: Record<string, any>,
+    goodsWidgetOptions: Record<string, any>,
+    gameReaderOptions: Record<string, any>,
+};
+
+type OverrideByMediaQuery = Partial<{
+    viewportMinSize: number | "sm" | "md" | "lg" | "xl"
+    mediaQuery: null|string
+}> & Partial<AppearanceManagerOptionGroups>;
+
+interface AppearanceManager {
+    setOptionsOverrideByMediaQuery(options: Array<OverrideByMediaQuery>): AppearanceManager;
+}
+
+/**
+ * viewportMinSize - set min screen width for this breakpoint
+ * if is number - translates to `(min-width: ${viewportMinSize}px)`
+ * 
+ * if is string (from range "sm" | "md" | "lg" | "xl") - translates to
+ * sm - `(min-width: 576px)`
+ * md - `(min-width: 768px)`
+ * lg - `(min-width: 992px)`
+ * xl - `(min-width: 1200px)`
+ * 
+ * mediaQuery - for you own custom mediaQuery rule for this breakpoint (applies if != null)
+ * 
+ * AppearanceManagerOptionGroups - contains the settings to be overridden for this breakpoint
+ */
+```
+
+Examples
+```ts
+const appearanceManager = new window.IAS.AppearanceManager();
+
+// set card gap in StoriesList different for different screen sizes
+// in this case, for screen width < 576 card.gap = card.gap from base config
+// for screen width >= 576 card.gap = 10
+// for screen width >= 768 card.gap = 15
+// for screen width >= 992 card.gap = 20
+// for screen width >= 1200 card.gap = 25
+appearanceManager.setOptionsOverrideByMediaQuery([
+    {
+        viewportMinSize: "sm", // 576
+        storiesListOptions: {
+            card: {
+                gap: 10
+            }
+        }
+    },
+    {
+        viewportMinSize: "md", // 768
+        storiesListOptions: {
+            card: {
+                gap: 15
+            }
+        }
+    },
+    {
+        viewportMinSize: "lg", // 992
+        storiesListOptions: {
+            card: {
+                gap: 20
+            }
+        }
+    },
+    {
+        viewportMinSize: "xl", // 1200
+        storiesListOptions: {
+            card: {
+                gap: 25
+            }
+        }
+    },
+]);
+```
+
+Notes:\
+Result options are the base options merged with options from all matching breakpoints.\
+You need call appearanceManager.setOptionsOverrideByMediaQuery before first creation of StoriesList - 
+for correct optionsOverrideByMediaQuery init.
+
+
+
 ## StoryManager events
-These events are for analytics purposes only
+These events are for analytics purposes only\
 You can subscribe to events after creating the widget instance
 ```js
 const storyManager = new window.IAS.StoryManager(storyManagerConfig);
