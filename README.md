@@ -103,7 +103,8 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     // appearance config
     appearanceManager.setCommonOptions({
       hasLike: true,
-      hasFavorite: true
+      hasFavorite: true, 
+      closeButtonPosition: 'right',
     })
       .setStoriesListOptions({
         title: {
@@ -163,7 +164,6 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         },
       })
       .setStoryReaderOptions({
-        closeButtonPosition: 'right',
         scrollStyle: 'flat',
         sharePanel: {
             targets: ["facebook", "twitter", "vk", "linkedin", "telegram"]
