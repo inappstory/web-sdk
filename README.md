@@ -2,32 +2,41 @@
 
 # Stories Widget
 
-This documentation is for version 2.6.6.
+This documentation is for version 2.7.0.
+
+## Migration guide from 2.6.7 to 2.7.0
+The default value of sharePanel.targets has changed\
+v2.6.7 - ["vk", "facebook", "twitter", "linkedin"]\
+v2.7.0 - ["vk", "facebook", "twitter", "linkedin", "telegram"]\
+New fields in AppearanceCommonOptions (closeButtonPosition, closeButton, loaderColors) affect all readers (StoryReader, StoryFavoriteReader, GameReader)\
+Readers loader default colors is now (color: "white", accentColor: "transparent")\
+GameReader SplashScreen default background color - black
+
 
 ## Migration guide from 2.4.10 to 2.4.11
-The signature of storyManager.showOnboardingStories method has changed
-2.4.10 version - showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string);
+The signature of storyManager.showOnboardingStories method has changed\
+2.4.10 version - showOnboardingStories(appearanceManager: AppearanceManager, customTags?: string);\
 2.4.11 version - showOnboardingStories(appearanceManager: AppearanceManager, options?: {feed?: string, customTags?: string});
 
 
 
 ## Migration guide from 2.3.5 to 2.4.x
-The signature of the StoriesList constructor has changed
-2.3.5 version - constructor(mountSelector: string, appearanceManager: AppearanceManager, feedSlug?: string);
+The signature of the StoriesList constructor has changed\
+2.3.5 version - constructor(mountSelector: string, appearanceManager: AppearanceManager, feedSlug?: string);\
 2.4.0 version - constructor(mountSelector: string, appearanceManager: AppearanceManager, options?: {feed?: string, testKey?: string});
 
 
 
 ## Migration guide from 2.2.x to 2.3.x
-Changes event names for storiesList instance
-from "startLoading" and "endLoading" to "startLoad" and "endLoad"
-
-The status of loading storiesList is added to "endLoad" event
-
-Field "read" in [Slider card item options](#slider-card-options) changed to "opened"
-
-For use custom feed - pass feedSlug as third argument to StoriesList constructor
-Value by default - "default"
+Changes event names for storiesList instance\
+from "startLoading" and "endLoading" to "startLoad" and "endLoad"\
+\
+The status of loading storiesList is added to "endLoad" event\
+\
+Field "read" in [Slider card item options](#slider-card-options) changed to "opened"\
+\
+For use custom feed - pass feedSlug as third argument to StoriesList constructor\
+Value by default - "default"\
 const storiesList = new storyManager.StoriesList("#stories_widget", appearanceManager, "customFeed");
 
 
@@ -57,7 +66,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.6.6/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.7.0/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -157,7 +166,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
         sharePanel: {
-            targets: ["facebook", "twitter", "vk", "linkedin"]
+            targets: ["facebook", "twitter", "vk", "linkedin", "telegram"]
         }
       }).setStoryFavoriteReaderOptions({
         title: {
@@ -282,7 +291,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         closeButtonPosition: 'right',
         scrollStyle: 'flat',
         sharePanel: {
-            targets: ["facebook", "twitter", "vk", "linkedin"]
+            targets: ["facebook", "twitter", "vk", "linkedin", "telegram"]
         }
       });
 
@@ -496,7 +505,7 @@ appearanceManager.setCommonOptions({
     closeButtonPosition: 'right',
     scrollStyle: 'flat',
     sharePanel: {
-        targets: ["facebook", "twitter", "vk", "linkedin"]
+        targets: ["facebook", "twitter", "vk", "linkedin", "telegram"]
     }
   });
 
@@ -527,7 +536,7 @@ appearanceManager.setCommonOptions({
     closeButtonPosition: 'right',
     scrollStyle: 'flat',
     sharePanel: {
-        targets: ["facebook", "twitter", "vk", "linkedin"]
+        targets: ["facebook", "twitter", "vk", "linkedin", "telegram"]
     }
   });
 
@@ -582,6 +591,16 @@ const storiesList = new storyManager.StoriesList("#stories_widget", appearanceMa
 | placeholders      | object                           | Dict for replace placeholders inside story content or title. Example: {user: "Guest"}                              |
 | imagePlaceholders | object                           | Dict for replace imagePlaceholders inside story content or title. Example: {imgAvatar: "avatar_url"}. Since v2.4.2 |
 | lang              | 'ru' &#124; 'en'                 | User locale                                                                                                        |
+
+## AppearanceManager - AppearanceCommonOptions
+
+| Variable                   | Type   | Description                                                                                         |
+|----------------------------|--------|-----------------------------------------------------------------------------------------------------|
+| closeButtonPosition        | string | Close button position, one of `left`, `right` (for all readers). Since v2.7.0                       |
+| closeButton                | object | [Overload](#close-button-options) close button svg icon. (for all readers). Since v2.7.0            |
+| loader.default.color       | string | Default loader primary color. Valid css color. Default - white (for all readers). Since v2.7.0      |
+| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - transparent (for all readers). Since v2.7.0 |
+
 
 ## AppearanceManager - StoriesListOptions
 
@@ -773,30 +792,30 @@ appearanceManager.setStoriesListOptions({
 
 ## AppearanceManager - StoryReaderOptions
 
-| Variable                   | Type                    | Description                                                                                                    |
-|----------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------|
-| closeButtonPosition        | string                  | Close button position, one of `left`, `right`                                                                  |
-| scrollStyle                | string                  | Stories viewPager scroll style, one of `flat`, `cover`, `cube`                                                 |
-| loader.default.color       | string                  | Default loader primary color. Valid css color. Default - white                                                 |
-| loader.default.accentColor | string                  | Default loader accent color. Valid css color. Default - transparent                                            |
-| sharePanel                 | object                  | [Options](#share-panel-options) for SharePanel. Since v2.3.5                                                   |
-| commonBackdrop             | object                  | [Options](#story-reader-backdrop-options) for StoryReader backdrop. Since v2.4.0                               |
-| slideBackdrop              | object                  | [Options](#story-reader-slide-backdrop-options) for StoryReader slide backdrop. Since v2.4.0                   |
-| timelineBlockTopOffset     | number &#124; undefined | Configure timeline block top offset, `px` Default `5`. Also expands the backdrop below the block. Since v2.4.5 |
-| actionPanelBottomOffset    | number &#124; undefined | Configure ActionPanel bottom offset, `px` Default `0`. Also expands the ActionPanel height. Since v2.4.6       |
-| closeButton                | object                  | [Overload](#close-button-options) close button svg icon. Since v2.5.6                                          |
-| likeButton                 | object                  | [Overload](#like-button-options) like button svg icon. Since v2.5.6                                            |
-| dislikeButton              | object                  | [Overload](#dislike-button-options) dislike button svg icon. Since v2.5.6                                      |
-| favoriteButton             | object                  | [Overload](#favorite-button-options) favorite button svg icon. Since v2.5.6                                    |
-| muteButton                 | object                  | [Overload](#mute-button-options) mute button svg icon. Since v2.5.6                                            |
-| shareButton                | object                  | [Overload](#share-button-options) share button svg icon. Since v2.5.6                                          |
+| Variable                   | Type                    | Description                                                                                                             |
+|----------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| closeButtonPosition        | string                  | Close button position, one of `left`, `right` (Override value from commonOptions, since v2.7.0)                         |
+| scrollStyle                | string                  | Stories viewPager scroll style, one of `flat`, `cover`, `cube`                                                          |
+| loader.default.color       | string                  | Default loader primary color. Valid css color. Default - white (Override value from commonOptions, since v2.7.0)        |
+| loader.default.accentColor | string                  | Default loader accent color. Valid css color. Default - transparent (Override value from commonOptions, since v2.7.0)   |
+| sharePanel                 | object                  | [Options](#share-panel-options) for SharePanel. Since v2.3.5                                                            |
+| commonBackdrop             | object                  | [Options](#story-reader-backdrop-options) for StoryReader backdrop. Since v2.4.0                                        |
+| slideBackdrop              | object                  | [Options](#story-reader-slide-backdrop-options) for StoryReader slide backdrop. Since v2.4.0                            |
+| timelineBlockTopOffset     | number &#124; undefined | Configure timeline block top offset, `px` Default `5`. Also expands the backdrop below the block. Since v2.4.5          |
+| actionPanelBottomOffset    | number &#124; undefined | Configure ActionPanel bottom offset, `px` Default `0`. Also expands the ActionPanel height. Since v2.4.6                |
+| closeButton                | object                  | [Overload](#close-button-options) close button svg icon. Since v2.5.6 (Override value from commonOptions, since v2.7.0) |
+| likeButton                 | object                  | [Overload](#like-button-options) like button svg icon. Since v2.5.6                                                     |
+| dislikeButton              | object                  | [Overload](#dislike-button-options) dislike button svg icon. Since v2.5.6                                               |
+| favoriteButton             | object                  | [Overload](#favorite-button-options) favorite button svg icon. Since v2.5.6                                             |
+| muteButton                 | object                  | [Overload](#mute-button-options) mute button svg icon. Since v2.5.6                                                     |
+| shareButton                | object                  | [Overload](#share-button-options) share button svg icon. Since v2.5.6                                                   |
 
 ## Share panel options
 
-| Variable | Type          | Description                                                                                                               |
-|----------|---------------|---------------------------------------------------------------------------------------------------------------------------|
-| targets  | Array<string> | Available values: "vk", "twitter", "facebook", "linkedin".<br/>Default value: \["vk", "facebook", "twitter", "linkedin"\] |
-
+| Variable | Type          | Description                                                                                                                                       |
+|----------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| targets  | Array<string> | Available values: "vk", "twitter", "facebook", "linkedin", "telegram".<br/>Default value: \["vk", "facebook", "twitter", "linkedin", "telegram"\] |
+telegram - available since v2.7.0\
 Example 
 ```js
 // AppearanceManager instance
@@ -988,7 +1007,8 @@ since v2.3.1
 | title.color           | string  | CSS valid color value. Default `white`                                                                                                                                                                                                                     |
 | title.font            | string  | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1.4rem/1.2 InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com). | 
 | title.backgroundColor | string  | StoryFavoriteReader header bg color. CSS valid color value. Default `#333333`. Since v2.6.6                                                                                                                                                                | 
-| closeButtonPosition   | ?string | Close button position, one of `left`, `right`. Default `right`. Since 2.4.7                                                                                                                                                                                | 
+| closeButtonPosition   | ?string | Close button position, one of `left`, `right`. Default `right`. Since 2.4.7 (Override value from commonOptions, since v2.7.0)                                                                                                                              | 
+| closeButton           | object  | [Overload](#close-button-options) close button svg icon. (Override value from commonOptions, since v2.7.0)                                                                                                                                                 |
 | headerTopOffset       | ?number | Header top offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                     | 
 | bottomOffset          | ?number | Bottom offset, `px` (with save bg color). Default `0`. Since 2.4.7                                                                                                                                                                                         | 
 | backgroundColor       | ?number | StoryFavoriteReader body bg color. CSS valid color value. Default `#333333`. Since v2.6.6                                                                                                                                                                  | 
@@ -999,10 +1019,12 @@ since v2.3.1
 ## AppearanceManager - GameReaderOptions
 since v2.6.4
 
-| Variable                   | Type   | Description                                                      |
-|----------------------------|--------|------------------------------------------------------------------|
-| loader.default.color       | string | Default loader primary color. Valid css color. Default - #D3DAE6 |
-| loader.default.accentColor | string | Default loader accent color. Valid css color. Default - #006BB4  |
+| Variable                   | Type    | Description                                                                                                        |
+|----------------------------|---------|--------------------------------------------------------------------------------------------------------------------|
+| loader.default.color       | string  | Default loader primary color. Valid css color. Default - #D3DAE6                                                   |
+| loader.default.accentColor | string  | Default loader accent color. Valid css color. Default - #006BB4                                                    |
+| closeButtonPosition        | ?string | Close button position, one of `left`, `right`. Default `right`. (Override value from commonOptions, since v2.7.0)  | 
+| closeButton                | object  | [Overload](#close-button-options) close button svg icon. (Override value from commonOptions, since v2.7.0)         |
 
 Examples
 ```js

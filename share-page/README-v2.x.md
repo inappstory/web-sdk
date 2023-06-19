@@ -95,7 +95,7 @@ The response body is a json object with the following fields:
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.ru/v2.6.6/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.ru/v2.7.0/dist/js/IAS.js";
     js.async = true;
     fjs.parentNode.insertBefore(js, fjs);
     st._e = [];
@@ -290,7 +290,7 @@ export default Vue.extend({
 
         const script = [
             {
-                src: $config.storiesSdkBaseDomain + '/v2.6.4/dist/js/IAS.js'
+                src: $config.storiesSdkBaseDomain + '/v2.7.0/dist/js/IAS.js'
             }
         ];
         
