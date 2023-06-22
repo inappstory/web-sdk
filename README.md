@@ -1299,7 +1299,38 @@ function byteLength(str: string) {
 ```
 
 
-## React UgcSdk example
+## React UgcSdk
+
+### Installing
+
+#### Package manager
+
+Using npm:
+
+```bash
+$ npm install @inappstory/react-ugc-sdk
+```
+
+Using yarn:
+
+```bash
+$ yarn add @inappstory/react-ugc-sdk
+```
+
+Using pnpm:
+
+```bash
+$ pnpm add @inappstory/react-ugc-sdk
+```
+
+Once the package is installed, you can import the library using `import` approach:
+
+```js
+import { UgcEditor, UgcSdk } from "@inappstory/react-ugc-sdk";
+```
+
+### Example
+
 ```js
 
 import { UgcEditor, UgcSdk } from "@inappstory/react-ugc-sdk";
