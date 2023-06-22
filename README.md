@@ -2,7 +2,12 @@
 
 # Stories Widget
 
-This documentation is for version 2.7.2.
+This documentation is for version 2.7.3.
+
+## Migration guide from 2.7.0 to 2.7.3
+Removed storyCard.title.color. Card title color is configurable in the console\
+For card.variant = "rectangle" aspect ratio is configured in the console.\
+Before v2.7.3 for rectangle card variant aspect ratio is 4:5 (0.8)
 
 ## Migration guide from 2.6.7 to 2.7.0
 The default value of sharePanel.targets has changed\
@@ -66,7 +71,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.7.2/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.7.3/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -115,7 +120,6 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
         },
         card: {
           title: {
-            color: 'black',
             font: '14px/16px "Segoe UI Semibold"',
             padding: 8
           },
@@ -643,7 +647,6 @@ const storiesList = new storyManager.StoriesList("#stories_widget", appearanceMa
 | title.position  | string               | Title position. Variants: `cardInsideBottom` (inside card, at bottom), `cardOutsideTop` (above the card) and `cardOutsideBottom`(under the card). Default - `cardInsideBottom`<br/> Note when using the `cardOutsideTop` or `cardOutsideBottom` option you must manually specify a [Slider layout height](#slider-layout-options) value. Usually this is the height of the card plus card title lineHeight * card title lineClamp + card title vertical padding |
 | title.textAlign | string               | Text in title horizontal align, variants: `left`, `center` and `right`. Default `left`.                                                                                                                                                                                                                                                                                                                                                                         |
 | title.lineClamp | number               | Numbers of text lines. Default 3.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| title.color     | string               | CSS valid color value. Default `#ffffff`                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | title.padding   | number &#124; string | Number, `px` eq for all sides. <br/>String - valid css, for customizing each side. Default `15`                                                                                                                                                                                                                                                                                                                                                                 |
 | title.font      | string               | CSS valid font [value](https://developer.mozilla.org/en-US/docs/Web/CSS/font). Override font. <br/>Default `normal 1rem InternalPrimaryFont` where InternalPrimaryFont - primary font, loaded in [project settings](https://console.inappstory.com).                                                                                                                                                                                                            | 
 | gap             | number               | Space between cards, `px`. Default `10`                                                                                                                                                                                                                                                                                                                                                                                                                         |
