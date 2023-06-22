@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.7.0.
+This documentation is for version 2.7.2.
 
 ## Migration guide from 2.6.7 to 2.7.0
 The default value of sharePanel.targets has changed\
@@ -66,7 +66,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.7.0/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.7.2/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -657,9 +657,30 @@ const storiesList = new storyManager.StoriesList("#stories_widget", appearanceMa
 | boxShadow       | string &#124; null   | Card box-shadow, valid css value. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                |
 | dropShadow      | string &#124; null   | Card drop-shadow, valid css value. Example - `1px 2px 8px rgba(34, 34, 34, 0.3)`. Default `null`. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                  |
 | opacity         | number               | Card opacity. Default `null`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| mask            | object &#124; null   | Card mask - overlay between card image and title. CSS valid color. Example - `rgba(0,0,0,.3)`. Default `null`                                                                                                                                                                                                                                                                                                                                                   |
+| mask            | object &#124; null   | [Options](#slider-card-mask) Card mask - overlay between card image and title. Default `null`                                                                                                                                                                                                                                                                                                                                                                   |
 | svgMask         | object &#124; null   | [Options](#slider-card-svg-masked-overlay) for card overlay with svg masks. Since v2.4.0                                                                                                                                                                                                                                                                                                                                                                        |
 | opened          | object &#124; null   | Contain keys: `border`, `boxShadow`, `opacity`, `mask` <br />Apply this values (if current value not null) on card in `opened` state. Default all values null                                                                                                                                                                                                                                                                                                   |
+
+
+### Slider card mask
+Card mask - overlay between card image and title.\
+Can be solid color.
+```js
+mask: {
+    color: "rgba(0,0,0,.3)"
+}
+```
+Can be linear gradient. Since v2.7.2
+```js
+mask: {
+    linearGradient: [
+        {
+            direction: "to bottom",
+            points: ["rgba(0, 0, 0, 0) 48.74%", "rgba(255, 0, 0, 0.6) 75.3%", "rgba(255, 0, 0, 0.6) 100%"],
+        },
+    ]
+}
+```
 
 
 ### Slider card svg masked overlay
