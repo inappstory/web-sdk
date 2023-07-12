@@ -2,7 +2,7 @@
 
 # Stories Widget
 
-This documentation is for version 2.7.4.
+This documentation is for version 2.7.6.
 
 ## Migration guide from 2.7.0 to 2.7.3
 Removed storyCard.title.color. Card title color is configurable in the console\
@@ -89,7 +89,7 @@ Web-sdk API lets you embed a Stories` widget on your website and control it usin
     if (d.getElementById(id)) return st;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://sdk.inappstory.com/v2.7.4/dist/js/IAS.js";
+    js.src = "https://sdk.inappstory.com/v2.7.6/dist/js/IAS.js";
     js.async = true;
     js.charset = "UTF-8";
     fjs.parentNode.insertBefore(js, fjs);
@@ -362,7 +362,8 @@ type StoryManagerCallbacks = {
 
 interface StoryManager {
   (config: StoryManagerConfig, callbacks?: StoryManagerCallbacks): StoryManager;
-  getInstance(): StoryManager; // static
+  getInstance(): StoryManager|null; // static
+  destroy(): void; // destroy StoryManager instance. Since v2.7.6
   setTags(tags: Array<string>): void;
   setUserId(userId: string | number): void;
   setLang(lang: 'ru' | 'en'): void;
